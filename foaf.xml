@@ -1,0 +1,19 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:admin="https://github.com/madjeek-web" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<foaf:PersonalProfileDocument rdf:about="https://madjeek-web.github.io/" dc:title="Fabien Conéjéro / FC84">
+<foaf:maker rdf:resource="#Fabien Conéjéro"/>
+</foaf:PersonalProfileDocument>
+<foaf:Person rdf:ID="Fabien Conéjéro">
+<foaf:name>Fabien Conéjéro</foaf:name>
+<foaf:title>Mr</foaf:title>
+<foaf:givenname>Fabien Conéjéro</foaf:givenname>
+<foaf:family_name>Conéjéro</foaf:family_name>
+<foaf:nick>FC84</foaf:nick>
+<foaf:gender>male</foaf:gender>
+<foaf:geekCode>GCS GAT</foaf:geekCode>
+<foaf:depiction rdf:resource="https://avatars.githubusercontent.com/u/83957788?v=4"/>
+<foaf:workplaceHomepage rdf:resource="https://madjeek-web.github.io/"/>
+<foaf:workInfoHomepage rdf:resource="https://madjeek-web.github.io/"/>
+<foaf:interest rdf:resource="https://www.torproject.org/"/>
+<foaf:mbox rdf:resource="mailto:encrypt-free.74.mq2fl@aleeas.com"/>
+</foaf:Person>
+</rdf:RDF>
