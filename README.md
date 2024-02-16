@@ -2,13 +2,6 @@ MY GITHUB WEBSITE : https://madjeek-web.github.io/
 
 ______
 
-# .....
-
-....
-## ....
-
-### ....
-
 |Name||
 |---|---|
 | **Globalize.css** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/madjeek-web/Globalize.css) [![Download](btn-download-sm.png)](https://github.com/...pdf)|
@@ -43,6 +36,14 @@ Created by [...](http://....com)
 
 [azerty](https://..../) ........azerty. 
 
+# link 1
+
+....
+## link 2
+
+### link 3
+
+_________
 
 License
 ------------
