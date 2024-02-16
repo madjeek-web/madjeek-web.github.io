@@ -36,7 +36,7 @@ A.....
 
 Created by [...](http://....com)
 
-[![Download](../btn-download.png)](https://github.com/.....pdf) [![Star](../btn-star.png)](../../../)
+[![Download](btn-download.png)](https://github.com/.....pdf) [![Star](btn-star.png)](../../../)
 
 
 ------------
