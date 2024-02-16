@@ -11,7 +11,7 @@ ______
 
 |Name||
 |---|---|
-| **.Globalize.css** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/madjeek-web/Globalize.css) [![Download](btn-download-sm.png)](https://github.com/...pdf)|
+| **Globalize.css** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/madjeek-web/Globalize.css) [![Download](btn-download-sm.png)](https://github.com/...pdf)|
 | **.....** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/....) [![Download](btn-download-sm.png)](https://github.com/....pdf)|
 | **....** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/.....) [![Download](btn-download-sm.png)](https://github.com/...pdf)|
 | **.....** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/....) [![Download](btn-download-sm.png)](https://github.com/....pdf)|
