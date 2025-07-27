@@ -8,8 +8,6 @@ ______
 | **Probalize.css** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/madjeek-web/Probalize.css) [![Download](btn-download-sm.png)](https://github.com/madjeek-web/Probalize.css/raw/main/dist/Probalize-css-Minimized.css)|
 | **....** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/.....) [![Download](btn-download-sm.png)](https://github.com/...pdf)|
 | **.....** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/....) [![Download](btn-download-sm.png)](https://github.com/....pdf)|
-| **....** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/.....) [![Download](btn-download-sm.png)](https://github.com/...pdf)|
-| **.....** | [![Preview](btn-preview.png)](https://raw.githubusercontent.com/.....jpg) [![Info](btn-readme.png)](https://github.com/....) [![Download](btn-download-sm.png)](https://github.com/....pdf)|
 
 Documentation ....
 =========================================
