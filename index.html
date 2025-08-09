@@ -236,6 +236,68 @@ Les valeurs courantes index, follow et archive déterminent si une page doit êt
             line-height: 1.6;
             margin: 15px 0;
         }
+
+/* ******************************************* */
+	
+	
+    /* FLECHE SCROLL EN BAS */
+	.scroll-hint {
+            color: #001a33;
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Conteneur de la flèche à particules */
+        .arrow-particles-container {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 50px auto;
+        }
+
+        /* Particules */
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #001a33; /* Bleu très foncé */
+            border-radius: 50%;
+            animation: scatter 2s infinite;
+            opacity: 0;
+        }
+
+        /* Flèche centrale */
+        .arrow-particles {
+            position: absolute;
+            font-size: 30px;
+            color: #001a33; /* Bleu très foncé */
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        /* Animation des particules */
+        @keyframes scatter {
+            0% { 
+                transform: translate(0, 0); 
+                opacity: 0; 
+            }
+            50% { 
+                transform: translate(var(--x), var(--y)); 
+                opacity: 0.8; 
+            }
+            100% { 
+                transform: translate(0, 0); 
+                opacity: 0; 
+            }
+        }
+
+        /* Effet au survol */
+        .arrow-particles-container:hover .arrow-particles {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
     </style>
     
 
@@ -264,6 +326,12 @@ Les valeurs courantes index, follow et archive déterminent si une page doit êt
             <h2>My work on digital - experimental studies / research<br/>
             web works - projects under free license MIT / Open Source</h2>
             </hgroup>
+			<div class="arrow-particles-container" id="particles-container">
+        <div class="arrow-particles">↓</div>
+        <!-- Les particules seront ajoutées en JS -->
+    </div>
+
+    <p class="scroll-hint">Faites défiler vers le bas</p>
         </div>
     </div>
     </header>
@@ -355,6 +423,48 @@ window.onload = function() {
     showContent(contentDivs[0]);
 };
 </script>
+
+		<script>
+        // Génération des particules
+        const container = document.getElementById('particles-container');
+        const particleCount = 10; // Nombre de particules
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Position aléatoire des particules en forme de cercle
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 20 + Math.random() * 15;
+            const x = Math.cos(angle) * distance;
+            const y = Math.sin(angle) * distance;
+            
+            particle.style.setProperty('--x', `${x}px`);
+            particle.style.setProperty('--y', `${y}px`);
+            particle.style.animationDelay = `${Math.random() * 2}s`;
+            
+            // Variation de taille pour plus de naturel
+            const size = 3 + Math.random() * 4;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Légère variation de couleur
+            const hue = 210 + Math.random() * 10; // Bleu légèrement varié
+            particle.style.backgroundColor = `hsl(${hue}, 100%, 15%)`;
+            
+            container.appendChild(particle);
+        }
+
+        // Animation supplémentaire au clic
+        container.addEventListener('click', () => {
+            container.classList.add('click-effect');
+            setTimeout(() => {
+                container.classList.remove('click-effect');
+            }, 1000);
+        });
+    </script>
+		
 </main>
 </body>
 </html>
+
