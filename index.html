@@ -13,6 +13,28 @@ data-mainEntity="Web Work" data-temporalCoverage="2009/2200" data-about="website
 data-taxonomy-term="CreativeWebDevelopment" data-cto-category="Internet" data-full-width-responsive="true">
 <meta charset="utf-8" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<script>
+// Blocage clic droit Version complète (bloque aussi les touches F12 et Ctrl+Shift+I), (Ce blocage est facile à contourner (via les options du navigateur ou en désactivant JavaScript)
+// Alternatives : Pour une vraie protection, utilisez :
+// Watermarking pour les images
+// Protection DRM pour les médias
+// Authentification pour le contenu sensible
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+        
+        // Blocage inspecteur (F12/Ctrl+Shift+I)
+        document.onkeydown = function(e) {
+            if (e.key === "F12" || 
+                (e.ctrlKey && e.shiftKey && e.key === "I") || 
+                (e.ctrlKey && e.shiftKey && e.key === "J") || 
+                (e.ctrlKey && e.key === "U")) {
+                e.preventDefault();
+                return false;
+            }
+        };
+</script>
+
 <link rel="meta" type="application/rdf+xml" title="foaf" href="https://github.com/madjeek-web/madjeek-web.github.io/blob/main/foaf.xml" data-type="application/rdf+xml" />
 
 <meta name="robots" content="follow, index" /><meta name="googlebot" content="index, follow" />
@@ -466,5 +488,6 @@ window.onload = function() {
 </main>
 </body>
 </html>
+
 
 
