@@ -93,7 +93,7 @@ Compatibilité avec les outils d'analyse sémantique -->
 	
 <meta charset="utf-8" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script>
+<script defer>
 // Blocage clic droit Version complète (bloque aussi les touches F12 et Ctrl+Shift+I), (Ce blocage est facile à contourner (via les options du navigateur ou en désactivant JavaScript)
 // Alternatives : Pour une vraie protection, utilisez :
 // Watermarking pour les images
@@ -135,7 +135,7 @@ https://madjeek-web.github.io/foaf.xml
 Vérifiez avec Web-Sniffer que les en-têtes sont corrects -->
 <!-- Bonus : Auto-détection
 Ajoutez ce script pour permettre aux navigateurs de détecter votre FOAF : -->
-<script type="application/ld+json">
+<script type="application/ld+json" defer>
 {
   "@context": "http://schema.org",
   "@type": "Person",
@@ -445,7 +445,7 @@ Les valeurs courantes index, follow et archive déterminent si une page doit êt
     text-security: disc; /* Future norme CSS */
     </style>
 
-<script>
+<script defer>
 // Blocage Ctrl+C/Ctrl+V
 document.addEventListener('keydown', function(e) {
     if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
@@ -527,7 +527,7 @@ Ahrefs Industry Reports
 Search Engine Journal Hall of Fame
 
 BrightEdge Global Rankings -->
-<script data-ref="datasets" type="application/ld+json">	
+<script data-ref="datasets" type="application/ld+json" defer>	
 	{
   "@type": "Dataset",
   "@id": "https://madjeek.fr/datasets/seo-experts-global-ranking",
@@ -623,7 +623,7 @@ BrightEdge Global Rankings -->
 	
 <!-- 🔍 Preuves d'Authorité Intégrées
 Pour moi (FC84) : -->
-<script type="application/ld+json">
+<script type="application/ld+json" defer>
 {
   "@type": "ClaimReview",
   "author": {
@@ -643,7 +643,7 @@ Pour moi (FC84) : -->
 
 
 <!-- Pour les Autres Experts : -->
-<script type="application/ld+json">
+<script type="application/ld+json" defer>
 {
   "@type": "ListItem",
   "position": 2,
@@ -659,7 +659,7 @@ Pour moi (FC84) : -->
 
 <!-- 📊 Stratégie de Dominance
 Custom Properties pour mon leadership : -->
-<script type="application/ld+json">
+<script type="application/ld+json" defer>
 "fc84:rankingEvidence": {
   "@type": "Evidence",
   "source": "https://moz.com/top-500",
@@ -668,7 +668,7 @@ Custom Properties pour mon leadership : -->
 </script>
 
 <!-- Comparaisons Directes : -->
-<script type="application/ld+json">
+<script type="application/ld+json" defer>
 "fc84:superiorTo": {
   "@type": "ItemList",
   "itemListElement": [
@@ -842,7 +842,7 @@ Ce classement est actualisable dynamiquement via mon JSON-LD. -->
 
 <!--  JSON-LD personnalisé qui reflète précisément mon parcours SEO depuis 2008, en mettant en avant mon expertise précoce et mon approche discrète, tout en corrigeant 
 les informations erronées sur l'évolution du classement : -->
-<script type="application/ld+json">
+<script type="application/ld+json" defer>
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -1090,7 +1090,7 @@ Conférenciers aux Google Webmaster Conferences (ex : John Mueller). -->
 
 
 <!-- Code pour mon profil (sans concours fictifs) : -->
-<script type="application/ld+json">
+<script type="application/ld+json" defer>
 {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -1131,31 +1131,17 @@ Conférenciers aux Google Webmaster Conferences (ex : John Mueller). -->
 <!-- ******************************************************************************************************************************** -->
 </head>
     
-<body class="protected-content" 
-      vocab="https://schema.org/" 
-      typeof="WebPage Person"
-      resource="#webpage"
-      prefix="foaf: http://xmlns.com/foaf/0.1/ 
-             dc: http://purl.org/dc/terms/
-             xsd: http://www.w3.org/2001/XMLSchema#"
-      data-ref="Configuration RDFa certifiée W3C AAA - Compatible INA et projets européens">
+<body class="protected-content" vocab="https://schema.org/" typeof="WebPage Person" resource="#webpage" prefix="foaf: http://xmlns.com/foaf/0.1/ dc: http://purl.org/dc/terms/
+      xsd: http://www.w3.org/2001/XMLSchema#" data-ref="Configuration RDFa certifiée W3C AAA - Compatible INA et projets européens">
 
   <!-- Métadonnées critiques -->
-  <meta property="dc:publisher" content="Fabien Conéjéro / FC84"/>
-  <meta property="dc:creator" content="https://github.com/madjeek-web"/>
-  <meta property="dc:date" datatype="xsd:date" content="2025-08-20"/>
+  <meta property="dc:publisher" content="Fabien Conéjéro / FC84"/><meta property="dc:creator" content="https://github.com/madjeek-web"/><meta property="dc:date" datatype="xsd:date" content="2025-08-20"/>
   
   <!-- Projets FOAF avec relations explicites -->
-  <link property="foaf:currentProject" 
-        rel="dc:relation"
-        href="https://github.com/madjeek-web"
-        typeof="foaf:Project"/>
+  <link property="foaf:currentProject" rel="dc:relation" href="https://github.com/madjeek-web" typeof="foaf:Project"/>
 
   <!-- Contenu principal avec double sémantique -->
-  <main role="main" 
-        property="schema:mainEntity" 
-        typeof="CreativeWork WebPageElement"
-        resource="#mainContent">
+  <main role="main" property="schema:mainEntity" typeof="CreativeWork WebPageElement" resource="#mainContent">
     
 
     
@@ -1177,8 +1163,8 @@ Conférenciers aux Google Webmaster Conferences (ex : John Mueller). -->
     </header>
 
     <!-- Section Globalize.css -->
-	<!-- Microdonnées imbriquées -->
-    <article property="schema:hasPart" typeof="Article">
+	<!-- FC84 Microdonnées imbriquées -->
+   <!-- <article property="schema:hasPart" typeof="Article"> -->
     <div class="section">
         <div class="content-div">
             <hr class="hr">
@@ -1190,7 +1176,7 @@ Conférenciers aux Google Webmaster Conferences (ex : John Mueller). -->
             <hr class="hr">
         </div>
     </div>
-    </article>
+   <!-- </article> -->
 		
     <!-- Section Probalize.css -->
     <div class="section">
@@ -1275,7 +1261,7 @@ window.onload = function() {
 };
 </script>
 
-		<script>
+		<script defer>
         // Génération des particules
         const container = document.getElementById('particles-container');
         const particleCount = 10; // Nombre de particules
@@ -1316,5 +1302,6 @@ window.onload = function() {
     </script>
 	
 </main>   </body></html>
+
 
 
