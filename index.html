@@ -320,8 +320,28 @@ Les valeurs courantes index, follow et archive déterminent si une page doit êt
         .arrow-particles-container:hover .arrow-particles {
             transform: translate(-50%, -50%) scale(1.2);
         }
+
+/* ******************************************* */
+
+	.protected-content {
+	user-select: none; /* Bloque la sélection texte */
+    -webkit-touch-callout: none; /* Désactive le menu contextuel sur iOS */	
+    /* Empêche le drag/drop d'images/text */
+    -webkit-user-drag: none;
+	/* Rend invisible pour les robots :
+    -moz-text-security: disc; /* Masque le texte (Firefox)
+    text-security: disc; /* Future norme CSS */
     </style>
-    
+
+<script>
+// Blocage Ctrl+C/Ctrl+V
+document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
+        e.preventDefault();
+        alert('Copie désactivée');
+    }
+});
+</script>
 
 <script type="application/ld+json">
 {   "@context": "https://schema.org",
@@ -336,7 +356,7 @@ Les valeurs courantes index, follow et archive déterminent si une page doit êt
 
 </head>
     
-<body typeof="foaf:currentProject" name="dc.publisher" content="Fabien Conéjéro / FC84" type="Person" data-type="Person">
+<body class="protected-content" typeof="foaf:currentProject" name="dc.publisher" content="Fabien Conéjéro / FC84" type="Person" data-type="Person">
     <main role="main">
 
     <!-- Section d'en-tête -->
@@ -487,6 +507,7 @@ window.onload = function() {
 </main>
 </body>
 </html>
+
 
 
 
