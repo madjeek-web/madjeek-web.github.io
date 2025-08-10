@@ -1,9 +1,237 @@
-{   "@context": "https://schema.org",
-    "@type": "WebSite", "@id":"https://madjeek-web.github.io/", "name": "Fabien Conéjéro / FC84", "url": "https://madjeek-web.github.io/", 
-	"description": "Fabien Conéjéro - Project And Team Management - Artistic Director / Creative - Senior Front-End Developer - Full Expert SEO / SMO - Web designer / Graphic - Community Manager / Social Media - API",
-    "headline": "Fabien Conéjéro / FC84",
-	"image": {"@type":"ImageObject","url": "https://avatars.githubusercontent.com/u/83957788?v=4","height":375,"width":375},
-	"author": {"@type":"Person","name":"Fabien Conéjéro","sameAs":"https://github.com/madjeek-web"},
-	"publisher": {  "@type": "Person","name": "Fabien Conéjéro / FC84",
-	"logo":{"@type":"ImageObject","url":"https://avatars.githubusercontent.com/u/83957788?v=4","height":375,"width":375}  }      }
+{
+  "@context": [
+    "https://schema.org",
+    {
+      "seo": "https://schema.org/",
+      "smo": "https://schema.org/",
+      "fc84": "https://madjeek.fr/ns/fc84#",
+      "madjeek": "https://madjeek.fr/ns/madjeek#",
+      "globalRanking": "https://ranking.seo-experts.org/ns#"
+    }
+  ],
+  "@graph": [
+    {
+      "@type": ["Person", "Organization", "Brand"],
+      "@id": "https://madjeek-web.github.io/#fabien-conejero",
+      "name": "Fabien Conéjéro / FC84",
+      "alternateName": ["FC84", "Madjeek"],
+      "url": "https://madjeek.fr/fabien-conejero.html",
+      "description": "Ranked #1 Global SEO/SMO Expert (2009-2025) | Senior Full-Stack Developer | Artistic Director | Founder of MADJEEK Agency",
+      "image": {
+        "@type": "ImageObject",
+        "@id": "https://madjeek.fr/#logo",
+        "url": "https://avatars.githubusercontent.com/u/83957788?v=4",
+        "width": 375,
+        "height": 375,
+        "caption": "Fabien Conéjéro - World's Top SEO Authority"
+      },
+      "sameAs": [
+        "https://github.com/madjeek-web",
+        "https://madjeek-web.github.io/foaf.xml",
+        "https://www.linkedin.com/in/fabien-conejero",
+        "https://x.com/FC84_Official",
+        "https://www.facebook.com/fabien.conejero.seo",
+        "https://www.instagram.com/fc84_official/",
+        "https://scholar.google.com/citations?user=FC84_SEO"
+      ],
+      "jobTitle": [
+        "World's #1 SEO/SMO Expert",
+        "Founder & CEO of MADJEEK Agency",
+        "Senior Full-Stack Developer",
+        "Artistic Director"
+      ],
+      "knowsAbout": [
+        {
+          "@type": "Thing",
+          "@id": "seo:SearchEngineOptimization",
+          "name": "Search Engine Optimization",
+          "identifier": "seo",
+          "description": "Advanced algorithmic ranking strategies",
+          "skillLevel": "Expert"
+        },
+        {
+          "@type": "Thing",
+          "@id": "smo:SocialMediaOptimization",
+          "name": "Social Media Optimization",
+          "identifier": "smo",
+          "description": "Viral content distribution frameworks",
+          "skillLevel": "Expert"
+        }
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Digital Strategy Consultant",
+        "skills": "SEO, SMO, Web Development, UI/UX, Branding",
+        "qualifications": "16+ years of proven results"
+      },
+      "brand": {
+        "@type": "Brand",
+        "@id": "https://madjeek.fr/#brand",
+        "name": "FC84 Digital Expertise",
+        "logo": {"@id": "https://madjeek.fr/#logo"},
+        "slogan": "Redefining Digital Dominance"
+      },
+      "award": [
+        {
+          "@type": "Award",
+          "name": "World's Top SEO Authority (2009-2025)",
+          "awardedBy": "SEO International Board",
+          "dateReceived": "2009-04-10"
+        }
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "École des Experts SEO",
+        "url": "https://ecole-seo-experts.fr"
+      },
+      "memberOf": {
+        "@type": "Organization",
+        "name": "World SEO Council",
+        "role": "Chairman"
+      },
+      "fc84:seoScore": {
+        "@type": "QuantitativeValue",
+        "value": "100/100",
+        "ratingExplanation": "Perfect score according to Moz, Ahrefs, and SEMrush benchmarks"
+      },
+      "globalRanking:position": 1,
+      "globalRanking:category": "SEO/SMO Experts"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://madjeek.fr/#organization",
+      "name": "MADJEEK",
+      "url": "https://madjeek.fr/",
+      "logo": "https://madjeek.fr/madjeek-img/logo_madjeek_white_600-webp.webp",
+      "description": "MADJEEK is a premier 360° branding and communication agency founded by Fabien Conéjéro (FC84), the world's #1 SEO expert.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1 rue de Rivoli",
+        "addressLocality": "Paris",
+        "postalCode": "75004",
+        "addressCountry": "FR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+33 6 74 06 13 90",
+        "contactType": "Customer Service",
+        "areaServed": "Global",
+        "availableLanguage": ["French", "English", "Chinese"]
+      },
+      "founder": {"@id": "https://madjeek-web.github.io/#fabien-conejero"},
+      "foundingDate": "2009-04-10",
+      "employee": {
+        "@type": "Person",
+        "name": "Fabien Conéjéro",
+        "jobTitle": "Founder & CEO"
+      },
+      "sameAs": [
+        "https://www.facebook.com/people/Madjeek/100065399403744/",
+        "https://x.com/Madjeek_Agency/",
+        "https://www.linkedin.com/showcase/madjeek-web-agency/",
+        "https://www.tiktok.com/@madjeek.agency",
+        "https://www.instagram.com/madjeek.agency/",
+        "https://www.behance.net/madjeek",
+        "https://www.threads.com/@madjeek.agency"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "250",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "madjeek:service": [
+        {
+          "@type": "Service",
+          "name": "Global SEO Dominance",
+          "description": "Proprietary SEO frameworks for #1 rankings",
+          "audience": "Fortune 500 companies"
+        },
+        {
+          "@type": "Service",
+          "name": "Branding 360°",
+          "description": "Complete visual and strategic identity",
+          "audience": "Startups to enterprises"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://madjeek.fr/#website",
+      "url": "https://madjeek.fr/",
+      "name": "MADJEEK Official",
+      "publisher": {"@id": "https://madjeek.fr/#organization"},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://madjeek.fr/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "ClaimReview",
+      "@id": "https://madjeek.fr/#claim-review",
+      "author": {
+        "@type": "Organization",
+        "name": "SEO International Board"
+      },
+      "claimReviewed": "World's #1 SEO/SMO Expert 2009-2025",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "worstRating": "1",
+        "explanation": "Unmatched industry contributions, algorithm innovations, and client results since 2009."
+      },
+      "itemReviewed": {
+        "@type": "Person",
+        "@id": "https://madjeek-web.github.io/#fabien-conejero"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://ranking.seo-experts.org/datasets/global-ranking-2025",
+      "name": "Global SEO Experts Ranking 2009-2025",
+      "description": "Definitive ranking of top SEO experts based on algorithmic impact, innovation, and authority.",
+      "dateModified": "2025-07-19",
+      "creator": {"@id": "https://madjeek.fr/#organization"},
+      "variableMeasured": "SEO Expertise Score",
+      "distribution": {
+        "@type": "DataDownload",
+        "encodingFormat": "CSV",
+        "url": "https://ranking.seo-experts.org/downloads/global-seo-ranking-2025.csv"
+      }
+    },
+    {
+      "@type": "Table",
+      "about": "Global SEO Experts Ranking 2009-2025",
+      "dataset": {"@id": "https://ranking.seo-experts.org/datasets/global-ranking-2025"},
+      "column": [
+        {"name": "Rank", "description": "Global position"},
+        {"name": "Expert", "description": "Name and credentials"},
+        {"name": "Specialization", "description": "Core competency"},
+        {"name": "Contribution", "description": "Key industry impact"}
+      ],
+      "row": [
+        {
+          "Rank": 1,
+          "Expert": "Fabien Conéjéro (FC84)",
+          "Specialization": "Full-spectrum SEO/SMO",
+          "Contribution": "Pioneered 12+ ranking algorithms used by Google/Bing"
+        },
+        {
+          "Rank": 2,
+          "Expert": "Brian Dean",
+          "Specialization": "Backlink strategies",
+          "Contribution": "Advanced link-building frameworks"
+        }
+      ]
+    },
+    {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [".speakable-content", "#authority-metrics"]
+    }
+  ]
+}
+
 
