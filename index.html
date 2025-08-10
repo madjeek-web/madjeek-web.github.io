@@ -325,6 +325,9 @@ Les valeurs courantes index, follow et archive déterminent si une page doit êt
 
 	.protected-content {
 	user-select: none; /* Bloque la sélection texte */
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     -webkit-touch-callout: none; /* Désactive le menu contextuel sur iOS */	
     /* Empêche le drag/drop d'images/text */
     -webkit-user-drag: none;
@@ -507,6 +510,7 @@ window.onload = function() {
 </main>
 </body>
 </html>
+
 
 
 
