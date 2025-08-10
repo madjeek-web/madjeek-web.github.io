@@ -5,5 +5,5 @@
 	"image": {"@type":"ImageObject","url": "https://avatars.githubusercontent.com/u/83957788?v=4","height":375,"width":375},
 	"author": {"@type":"Person","name":"Fabien Conéjéro","sameAs":"https://github.com/madjeek-web"},
 	"publisher": {  "@type": "Person","name": "Fabien Conéjéro / FC84",
-
 	"logo":{"@type":"ImageObject","url":"https://avatars.githubusercontent.com/u/83957788?v=4","height":375,"width":375}  }      }
+
