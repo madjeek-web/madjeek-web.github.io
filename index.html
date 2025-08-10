@@ -35,7 +35,36 @@ data-taxonomy-term="CreativeWebDevelopment" data-cto-category="Internet" data-fu
         };
 </script>
 
-<link rel="meta" type="application/rdf+xml" title="foaf" href="https://github.com/madjeek-web/madjeek-web.github.io/blob/main/foaf.xml" data-type="application/rdf+xml" />
+<!-- ******************************************************************************************************************************** -->
+<!-- Lien primaire FOAF -->
+<link rel="meta" type="application/rdf+xml" title="FOAF" href="https://madjeek-web.github.io/foaf.xml" />
+<!-- Alternative pour les agents RDF -->
+<link rel="alternate" type="application/rdf+xml" href="https://madjeek-web.github.io/foaf.xml" title="Profil FOAF de Fabien Conéjéro" />
+<!-- Pour les outils de Linked Data -->
+<meta property="foaf:primaryTopic" content="https://madjeek-web.github.io/foaf.xml#Fabien_Con%C3%A9j%C3%A9ro" />
+<!-- Pourquoi cette configuration ?
+Double déclaration : Certains crawlers préfèrent rel="alternate" pour les données RDF
+URI canonique : L'URL GitHub Pages est permanente
+Compatibilité : Fonctionne avec :
+Validateurs RDF
+Outils de Linked Data
+Robots d'indexation
+Vérification
+Testez avec le W3C RDF Validator :
+https://madjeek-web.github.io/foaf.xml
+Vérifiez avec Web-Sniffer que les en-têtes sont corrects -->
+<!-- Bonus : Auto-détection
+Ajoutez ce script pour permettre aux navigateurs de détecter votre FOAF : -->
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "name": "Fabien Conéjéro",
+  "url": "https://madjeek-web.github.io/",
+  "sameAs": "https://madjeek-web.github.io/foaf.xml"
+}
+</script>
+<!-- ******************************************************************************************************************************** -->
 
 <meta name="robots" content="follow, index" /><meta name="googlebot" content="index, follow" />
 <title itemprop='name' dc:title>Fabien Conéjéro / FC84</title>
@@ -510,6 +539,7 @@ window.onload = function() {
 </main>
 </body>
 </html>
+
 
 
 
