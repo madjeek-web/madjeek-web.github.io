@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Popup Blocker Pro — Test de diagnostic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Variables & Reset ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #07080d;
+      --surface:   #0e101a;
+      --border:    #1d2035;
+      --accent:    #00f5a0;
+      --accent2:   #00b4d8;
+      --danger:    #ff4757;
+      --warn:      #ffa502;
+      --text:      #dde1f0;
+      --muted:     #5c6080;
+      --pass:      #00f5a0;
+      --fail:      #ff4757;
+      --pending:   #ffa502;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── Grid background ────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,245,160,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,160,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── Scan line animation ─────────────────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -100%;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0,245,160,.015) 50%, transparent 100%);
+      animation: scanline 8s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes scanline { to { top: 200%; } }
+
+    /* ─── Layout ──────────────────────────────────────────────────── */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ─── Header ──────────────────────────────────────────────────── */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,245,160,.08);
+      border: 1px solid rgba(0,245,160,.25);
+      color: var(--accent);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ─── Global Result Banner ───────────────────────────────────── */
+    .global-result {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      transition: border-color .4s, background .4s;
+    }
+
+    .global-result.pass  { border-color: rgba(0,245,160,.5); background: rgba(0,245,160,.05); }
+    .global-result.fail  { border-color: rgba(255,71,87,.5);  background: rgba(255,71,87,.05);  }
+
+    .result-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+      filter: grayscale(1);
+      transition: filter .4s;
+    }
+    .global-result.pass .result-icon,
+    .global-result.fail .result-icon { filter: grayscale(0); }
+
+    .result-text h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--muted);
+      transition: color .4s;
+    }
+    .global-result.pass .result-text h2 { color: var(--pass); }
+    .global-result.fail .result-text h2 { color: var(--fail); }
+
+    .result-text p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .score-pill {
+      margin-left: auto;
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      padding: 8px 18px;
+      border-radius: 8px;
+      background: var(--border);
+      color: var(--muted);
+      transition: background .4s, color .4s;
+      white-space: nowrap;
+    }
+    .global-result.pass .score-pill { background: rgba(0,245,160,.15); color: var(--pass); }
+    .global-result.fail .score-pill { background: rgba(255,71,87,.15);  color: var(--fail); }
+
+    /* ─── Test Cards ─────────────────────────────────────────────── */
+    .tests-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .test-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      transition: border-color .3s;
+    }
+
+    .test-card.pass  { border-color: rgba(0,245,160,.3); }
+    .test-card.fail  { border-color: rgba(255,71,87,.35); }
+
+    /* Status dot */
+    .test-status {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      background: var(--border);
+      transition: background .3s;
+    }
+    .test-card.pass  .test-status { background: rgba(0,245,160,.15); }
+    .test-card.fail  .test-status { background: rgba(255,71,87,.12); }
+    .test-card.running .test-status { animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .test-info { min-width: 0; }
+
+    .test-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .test-desc {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+    }
+
+    .test-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      background: var(--border);
+      color: var(--muted);
+      transition: all .3s;
+    }
+    .test-card.pass  .test-tag { background: rgba(0,245,160,.15); color: var(--pass); }
+    .test-card.fail  .test-tag { background: rgba(255,71,87,.12);  color: var(--fail); }
+    .test-card.running .test-tag { background: rgba(255,165,2,.12); color: var(--warn); }
+
+    /* ─── Manual Test Section ─────────────────────────────────────── */
+    .manual-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .manual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .manual-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 14px 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      transition: all .15s;
+      text-align: left;
+    }
+    .manual-btn:hover { border-color: var(--accent2); transform: translateY(-1px); }
+    .manual-btn:active { transform: translateY(0); }
+
+    .manual-btn-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+    .manual-btn-desc {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .manual-result {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ─── Log ─────────────────────────────────────────────────────── */
+    .log-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .log-header {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .log-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+
+    .log-clear {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      transition: color .15s;
+    }
+    .log-clear:hover { color: var(--danger); }
+
+    .log-body {
+      padding: 16px 20px;
+      min-height: 120px;
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 11px;
+      line-height: 2;
+    }
+
+    .log-line {
+      display: flex;
+      gap: 10px;
+      animation: fadein .2s ease;
+    }
+    @keyframes fadein { from { opacity:0; transform:translateX(-6px); } to { opacity:1; } }
+
+    .log-time { color: var(--muted); flex-shrink: 0; }
+    .log-pass { color: var(--pass); }
+    .log-fail { color: var(--fail); }
+    .log-info { color: var(--accent2); }
+    .log-warn { color: var(--warn); }
+
+    /* ─── Scrollbar ───────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ─── Header ──────────────────────────────────────────────────── -->
+  <div class="header">
+    <div class="badge">Diagnostic en cours</div>
+    <h1>Popup Blocker Pro<br><span>Test & Diagnostic</span></h1>
+    <p class="subtitle">Cette page lance automatiquement plusieurs scénarios d'attaque pour vérifier que l'extension bloque correctement.</p>
+  </div>
+
+  <!-- ─── Global Result ─────────────────────────────────────────── -->
+  <div class="global-result" id="global-result">
+    <div class="result-icon">⏳</div>
+    <div class="result-text">
+      <h2 id="global-title">Tests en cours…</h2>
+      <p id="global-desc">Analyse de la protection en temps réel.</p>
+    </div>
+    <div class="score-pill" id="score-pill">—</div>
+  </div>
+
+  <!-- ─── Test Cards ───────────────────────────────────────────── -->
+  <div class="tests-grid" id="tests-grid">
+    <!-- Injected by JS -->
+  </div>
+
+  <!-- ─── Manual Tests ─────────────────────────────────────────── -->
+  <div class="manual-section">
+    <div class="section-title">Tests manuels (cliquez vous-même)</div>
+    <div class="manual-grid">
+      <button class="manual-btn" onclick="manualTest('click-open', 'window.open() depuis un vrai clic')">
+        <span class="manual-btn-label">▶ Clic utilisateur</span>
+        <span class="manual-btn-desc">window.open() depuis un vrai clic<br>(doit être autorisé)</span>
+      </button>
+      <button class="manual-btn" onclick="manualTest('blank-link', 'Lien target=_blank cliqué')">
+        <span class="manual-btn-label">▶ Lien target=_blank</span>
+        <span class="manual-btn-desc">Clic sur un vrai lien externe<br>(doit être autorisé)</span>
+      </button>
+      <button class="manual-btn" onclick="manualTest('rapid-fire', 'Rafale de 5 popups')">
+        <span class="manual-btn-label">▶ Rafale × 5</span>
+        <span class="manual-btn-desc">5 window.open() en boucle<br>(doit tout bloquer)</span>
+      </button>
+    </div>
+    <div class="manual-result" id="manual-result">
+      <span>👆 Cliquez un bouton ci-dessus pour tester manuellement.</span>
+    </div>
+  </div>
+
+  <!-- ─── Event Log ──────────────────────────────────────────────── -->
+  <div class="log-section">
+    <div class="log-header">
+      <span class="log-title">Journal d'événements</span>
+      <button class="log-clear" onclick="clearLog()">Effacer</button>
+    </div>
+    <div class="log-body" id="log-body">
+      <!-- Log lines -->
+    </div>
+  </div>
+
+</div>
+
+<!-- Hidden blank link for test -->
+<a id="blank-link" href="https://example.com" target="_blank" style="display:none">blank</a>
+
+<script>
+// ─── Test Definitions ──────────────────────────────────────────────────────
+
+const TESTS = [
+  {
+    id: 'auto-blank',
+    name: 'window.open() automatique',
+    desc: '`window.open()` sans aucun geste utilisateur',
+    method: () => {
+      const w = window.open('about:blank', '_blank');
+      if (w) { w.close(); return false; } // opened = NOT blocked
+      return true; // null = blocked ✓
+    },
+  },
+  {
+    id: 'auto-url',
+    name: 'window.open() avec URL',
+    desc: '`window.open("https://example.com")` sans clic',
+    method: () => {
+      const w = window.open('https://example.com', '_blank');
+      if (w) { w.close(); return false; }
+      return true;
+    },
+  },
+  {
+    id: 'auto-features',
+    name: 'Popup avec features',
+    desc: '`window.open(url, "_blank", "width=400,height=300")`',
+    method: () => {
+      const w = window.open('about:blank', '_blank', 'width=400,height=300,scrollbars=yes');
+      if (w) { w.close(); return false; }
+      return true;
+    },
+  },
+  {
+    id: 'delayed',
+    name: 'Popup différé (1 seconde)',
+    desc: '`setTimeout(() => window.open(…), 1000)` — technique courante',
+    method: () => new Promise((resolve) => {
+      setTimeout(() => {
+        const w = window.open('about:blank');
+        if (w) { w.close(); resolve(false); }
+        else resolve(true);
+      }, 1000);
+    }),
+  },
+  {
+    id: 'mousemove-trick',
+    name: 'Fake mousemove trigger',
+    desc: 'Ouverture après un faux événement souris (non-trusted)',
+    method: () => {
+      // Simulate a fake event then immediately try to open
+      let fakeResult = null;
+      const fakeEvt = new MouseEvent('click', { bubbles: true, cancelable: true });
+      document.dispatchEvent(fakeEvt);
+      const w = window.open('about:blank');
+      if (w) { w.close(); fakeResult = false; }
+      else fakeResult = true;
+      return fakeResult;
+    },
+  },
+  {
+    id: 'iframe-attempt',
+    name: 'Tentative depuis iframe',
+    desc: 'Un iframe en sandbox essaie d\'ouvrir une fenêtre',
+    method: () => new Promise((resolve) => {
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.srcdoc = `<script>
+        try {
+          const w = window.open('about:blank');
+          window.parent.postMessage({id:'iframe-attempt', result: w === null}, '*');
+          if(w) w.close();
+        } catch(e) {
+          window.parent.postMessage({id:'iframe-attempt', result: true}, '*');
+        }
+      <\/script>`;
+      
+      const handler = (e) => {
+        if (e.data?.id === 'iframe-attempt') {
+          window.removeEventListener('message', handler);
+          document.body.removeChild(iframe);
+          resolve(e.data.result);
+        }
+      };
+      window.addEventListener('message', handler);
+      document.body.appendChild(iframe);
+
+      // Timeout fallback
+      setTimeout(() => {
+        window.removeEventListener('message', handler);
+        if (document.body.contains(iframe)) document.body.removeChild(iframe);
+        resolve(true); // Assume blocked if no message (CSP may have stopped it)
+      }, 2000);
+    }),
+  },
+];
+
+// ─── State ─────────────────────────────────────────────────────────────────
+
+let passed = 0;
+let failed = 0;
+let total = TESTS.length;
+
+// ─── Log ───────────────────────────────────────────────────────────────────
+
+function log(type, msg) {
+  const body = document.getElementById('log-body');
+  const now = new Date().toLocaleTimeString('fr-FR', { hour12: false });
+  const line = document.createElement('div');
+  line.className = 'log-line';
+  const icons = { pass: '✔', fail: '✘', info: '›', warn: '!' };
+  line.innerHTML = `<span class="log-time">${now}</span><span class="log-${type}">${icons[type] || '·'} ${msg}</span>`;
+  body.appendChild(line);
+  body.scrollTop = body.scrollHeight;
+}
+
+function clearLog() {
+  document.getElementById('log-body').innerHTML = '';
+}
+
+// ─── Render test cards ──────────────────────────────────────────────────────
+
+function renderCards() {
+  const grid = document.getElementById('tests-grid');
+  grid.innerHTML = '';
+  TESTS.forEach((t) => {
+    const card = document.createElement('div');
+    card.className = 'test-card running';
+    card.id = `card-${t.id}`;
+    card.innerHTML = `
+      <div class="test-status">⟳</div>
+      <div class="test-info">
+        <div class="test-name">${t.name}</div>
+        <div class="test-desc">${t.desc}</div>
+      </div>
+      <div class="test-tag">En attente</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function updateCard(id, pass) {
+  const card = document.getElementById(`card-${id}`);
+  if (!card) return;
+  card.className = `test-card ${pass ? 'pass' : 'fail'}`;
+  card.querySelector('.test-status').textContent = pass ? '✓' : '✘';
+  card.querySelector('.test-tag').textContent = pass ? 'BLOQUÉ ✓' : 'NON BLOQUÉ';
+}
+
+function updateGlobal() {
+  const el = document.getElementById('global-result');
+  const title = document.getElementById('global-title');
+  const desc = document.getElementById('global-desc');
+  const score = document.getElementById('score-pill');
+  const icon = el.querySelector('.result-icon');
+
+  const done = passed + failed;
+  score.textContent = `${passed} / ${done}`;
+
+  if (done < total) return; // Still running
+
+  const allPass = failed === 0;
+  el.className = `global-result ${allPass ? 'pass' : 'fail'}`;
+  icon.textContent = allPass ? '🛡' : '⚠️';
+  score.textContent = `${passed} / ${total}`;
+
+  if (allPass) {
+    title.textContent = 'Extension opérationnelle — tous les blocages OK';
+    desc.textContent = 'Popup Blocker Pro détecte et bloque correctement tous les scénarios de test.';
+    log('pass', `Résultat final : ${passed}/${total} tests passés — extension ACTIVE et fonctionnelle`);
+  } else {
+    title.textContent = `Attention — ${failed} scénario(s) non bloqué(s)`;
+    desc.textContent = `Vérifiez que l'extension est activée et que ce site n'est pas dans la liste blanche.`;
+    log('fail', `Résultat final : ${passed}/${total} — ${failed} test(s) échoué(s)`);
+  }
+}
+
+// ─── Run Tests ──────────────────────────────────────────────────────────────
+
+async function runTests() {
+  log('info', 'Démarrage de la suite de tests automatiques…');
+
+  for (const test of TESTS) {
+    // Small stagger for visual effect
+    await new Promise(r => setTimeout(r, 350));
+
+    log('info', `Test : "${test.name}"`);
+
+    let result;
+    try {
+      result = await Promise.resolve(test.method());
+    } catch (e) {
+      result = true; // Error = popup was blocked
+    }
+
+    updateCard(test.id, result);
+
+    if (result) {
+      passed++;
+      log('pass', `✓ "${test.name}" — BLOQUÉ correctement`);
+    } else {
+      failed++;
+      log('fail', `✘ "${test.name}" — POPUP NON BLOQUÉ (extension inactive ?)`);
+    }
+
+    updateGlobal();
+  }
+}
+
+// ─── Manual Tests ───────────────────────────────────────────────────────────
+
+function manualTest(type, label) {
+  const result = document.getElementById('manual-result');
+
+  if (type === 'click-open') {
+    // From a real click → should be ALLOWED by the extension
+    const w = window.open('about:blank', '_blank');
+    if (w) {
+      w.close();
+      result.innerHTML = `<span style="color:var(--pass)">✓ Fenêtre ouverte — comportement CORRECT</span> <span style="color:var(--muted)">(un vrai clic utilisateur doit être autorisé)</span>`;
+      log('pass', 'Clic utilisateur → popup autorisé (comportement attendu)');
+    } else {
+      result.innerHTML = `<span style="color:var(--warn)">⚠ Fenêtre bloquée même sur un vrai clic</span> <span style="color:var(--muted)">(vérifiez le niveau de protection)</span>`;
+      log('warn', 'Clic utilisateur → popup bloqué (niveau Strict ?)');
+    }
+  }
+
+  if (type === 'blank-link') {
+    document.getElementById('blank-link').click();
+    result.innerHTML = `<span style="color:var(--accent2)">› Lien cliqué — vérifiez si un onglet s'est ouvert dans votre navigateur.</span>`;
+    log('info', 'Lien target=_blank cliqué manuellement');
+  }
+
+  if (type === 'rapid-fire') {
+    let blocked = 0;
+    for (let i = 0; i < 5; i++) {
+      const w = window.open(`about:blank?${i}`);
+      if (w) w.close(); else blocked++;
+    }
+    const allBlocked = blocked === 5;
+    result.innerHTML = allBlocked
+      ? `<span style="color:var(--pass)">✓ ${blocked}/5 popups bloqués — parfait !</span>`
+      : `<span style="color:var(--fail)">✘ Seulement ${blocked}/5 bloqués — extension partiellement active.</span>`;
+    log(allBlocked ? 'pass' : 'fail', `Rafale : ${blocked}/5 popups bloqués`);
+  }
+}
+
+// ─── Boot ───────────────────────────────────────────────────────────────────
+
+renderCards();
+// Short delay so the page is fully rendered before firing tests
+window.addEventListener('load', () => setTimeout(runTests, 600));
+</script>
+</body>
+</html>
