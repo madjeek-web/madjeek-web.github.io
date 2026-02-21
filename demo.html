@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>microMVC+ Demo 2026</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg        : #f4f6f9;
+            --card      : #ffffff;
+            --primary   : #2563eb;
+            --accent    : #10b981;
+            --danger    : #ef4444;
+            --text      : #1e293b;
+            --muted     : #64748b;
+            --border    : #e2e8f0;
+            --radius    : 10px;
+            --shadow    : 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family : system-ui, -apple-system, sans-serif;
+            background  : var(--bg);
+            color       : var(--text);
+            min-height  : 100vh;
+            padding     : 2rem 1rem;
+        }
+
+        header {
+            text-align    : center;
+            margin-bottom : 2.5rem;
+        }
+
+        header h1 { font-size : 2rem; font-weight : 800; color : var(--primary); }
+        header p  { color : var(--muted); margin-top : 0.4rem; font-size : 1rem; }
+
+        .badge-row {
+            display         : flex;
+            flex-wrap       : wrap;
+            justify-content : center;
+            gap             : 0.5rem;
+            margin-top      : 0.8rem;
+        }
+
+        .badge {
+            background    : var(--primary);
+            color         : #fff;
+            font-size     : 0.72rem;
+            font-weight   : 600;
+            padding       : 3px 10px;
+            border-radius : 20px;
+            letter-spacing: 0.02em;
+        }
+
+        .badge.green  { background : var(--accent); }
+        .badge.gray   { background : var(--muted); }
+
+        .demos {
+            display               : grid;
+            grid-template-columns : repeat(auto-fit, minmax(320px, 1fr));
+            gap                   : 1.5rem;
+            max-width             : 1100px;
+            margin                : 0 auto;
+        }
+
+        .card {
+            background    : var(--card);
+            border-radius : var(--radius);
+            box-shadow    : var(--shadow);
+            padding       : 1.5rem;
+            border        : 1px solid var(--border);
+        }
+
+        .card h2 {
+            font-size     : 1.05rem;
+            font-weight   : 700;
+            margin-bottom : 0.3rem;
+            color         : var(--primary);
+        }
+
+        .card p.desc {
+            font-size     : 0.85rem;
+            color         : var(--muted);
+            margin-bottom : 1rem;
+        }
+
+        label {
+            display       : block;
+            font-size     : 0.82rem;
+            font-weight   : 600;
+            margin-bottom : 0.3rem;
+            color         : var(--muted);
+        }
+
+        input, select {
+            width         : 100%;
+            padding       : 0.5rem 0.75rem;
+            border        : 1px solid var(--border);
+            border-radius : 6px;
+            font-size     : 0.9rem;
+            margin-bottom : 0.8rem;
+            color         : var(--text);
+            background    : #fff;
+        }
+
+        button {
+            padding       : 0.5rem 1.2rem;
+            border-radius : 6px;
+            border        : none;
+            cursor        : pointer;
+            font-weight   : 600;
+            font-size     : 0.88rem;
+            transition    : opacity 0.15s;
+        }
+
+        button:hover   { opacity : 0.85; }
+        button:disabled { opacity : 0.4; cursor : not-allowed; }
+
+        .btn-primary { background : var(--primary); color : #fff; }
+        .btn-accent  { background : var(--accent);  color : #fff; }
+        .btn-danger  { background : var(--danger);  color : #fff; }
+        .btn-outline { background : transparent; border : 1px solid var(--border); color : var(--text); }
+
+        .btn-row {
+            display  : flex;
+            gap      : 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .result-box {
+            margin-top    : 1rem;
+            padding       : 0.9rem 1rem;
+            background    : var(--bg);
+            border-radius : 8px;
+            border        : 1px solid var(--border);
+            font-size     : 0.88rem;
+            min-height    : 50px;
+        }
+
+        .balance {
+            font-size   : 2rem;
+            font-weight : 800;
+            color       : var(--accent);
+            display     : block;
+            margin      : 0.5rem 0;
+        }
+
+        .balance.negative { color : var(--danger); }
+
+        .notification-bell {
+            position    : relative;
+            display     : inline-block;
+            font-size   : 1.8rem;
+            cursor      : pointer;
+            user-select : none;
+        }
+
+        .notif-badge {
+            position      : absolute;
+            top           : -4px;
+            right         : -8px;
+            background    : var(--danger);
+            color         : #fff;
+            font-size     : 0.65rem;
+            font-weight   : 800;
+            border-radius : 20px;
+            padding       : 1px 5px;
+            min-width     : 18px;
+            text-align    : center;
+        }
+
+        .notif-list {
+            margin-top : 0.8rem;
+            font-size  : 0.83rem;
+        }
+
+        .notif-item {
+            padding       : 0.4rem 0.6rem;
+            border-radius : 6px;
+            margin-bottom : 0.3rem;
+            background    : #eff6ff;
+            color         : var(--primary);
+            border-left   : 3px solid var(--primary);
+        }
+
+        .task-list {
+            list-style  : none;
+            margin      : 0.8rem 0;
+        }
+
+        .task-item {
+            display         : flex;
+            align-items     : center;
+            gap             : 0.5rem;
+            padding         : 0.4rem 0;
+            border-bottom   : 1px solid var(--border);
+            font-size       : 0.88rem;
+        }
+
+        .task-item.done span { text-decoration : line-through; color : var(--muted); }
+
+        .task-item button {
+            margin-left   : auto;
+            padding       : 2px 8px;
+            font-size     : 0.75rem;
+            border-radius : 4px;
+        }
+
+        .profile-zone {
+            display     : flex;
+            align-items : center;
+            gap         : 1rem;
+            margin      : 0.8rem 0;
+        }
+
+        .avatar {
+            width         : 64px;
+            height        : 64px;
+            border-radius : 50%;
+            background    : var(--primary);
+            display       : flex;
+            align-items   : center;
+            justify-content : center;
+            font-size     : 1.8rem;
+            color         : #fff;
+            font-weight   : 800;
+            flex-shrink   : 0;
+            overflow      : hidden;
+        }
+
+        .avatar img { width : 100%; height : 100%; object-fit : cover; }
+
+        .profile-info { font-size : 0.9rem; }
+        .profile-info strong { display : block; font-size : 1rem; }
+        .profile-info span   { color : var(--muted); font-size : 0.82rem; }
+
+        .log-box {
+            background    : #0f172a;
+            color         : #94a3b8;
+            border-radius : 8px;
+            padding       : 0.8rem 1rem;
+            font-family   : monospace;
+            font-size     : 0.78rem;
+            max-height    : 160px;
+            overflow-y    : auto;
+            margin-top    : 1rem;
+        }
+
+        .log-box p { margin-bottom : 0.2rem; }
+        .log-box .ts  { color : #475569; margin-right : 0.5rem; }
+        .log-box .ctx { color : #38bdf8; }
+        .log-box .val { color : #a3e635; }
+
+        .status-pill {
+            display       : inline-block;
+            padding       : 2px 10px;
+            border-radius : 20px;
+            font-size     : 0.75rem;
+            font-weight   : 700;
+        }
+
+        .status-pill.ok  { background : #d1fae5; color : #065f46; }
+        .status-pill.err { background : #fee2e2; color : #991b1b; }
+        .status-pill.wait { background : #fef3c7; color : #92400e; }
+
+        .progress-bar {
+            height        : 8px;
+            background    : var(--border);
+            border-radius : 4px;
+            margin        : 0.6rem 0;
+            overflow      : hidden;
+        }
+
+        .progress-fill {
+            height     : 100%;
+            background : var(--accent);
+            transition : width 0.4s ease;
+            border-radius : 4px;
+        }
+
+        footer {
+            text-align  : center;
+            color       : var(--muted);
+            font-size   : 0.8rem;
+            margin-top  : 3rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>microMVC+</h1>
+    <p>Zero-dependency JavaScript MVC micro-framework. Interactive demos for 2026.</p>
+    <div class="badge-row">
+        <span class="badge">v1.0.0</span>
+        <span class="badge green">Zero dependencies</span>
+        <span class="badge gray">MIT License</span>
+        <span class="badge">ES5+ compatible</span>
+    </div>
+</header>
+
+<div class="demos">
+
+    <!-- DEMO 1 : Bank transfer -->
+    <div class="card">
+        <h2>Demo 1 : Instant bank transfer</h2>
+        <p class="desc">
+            The model holds your balance. The view listens. When the controller validates
+            the transfer, the view updates instantly without any page reload.
+        </p>
+        <label>Your current balance</label>
+        <span class="balance" id="balance-display">2 500.00 EUR</span>
+        <div class="progress-bar">
+            <div class="progress-fill" id="balance-bar" style="width: 100%"></div>
+        </div>
+        <label>Transfer amount (EUR)</label>
+        <input type="number" id="transfer-amount" value="200" min="1" />
+        <label>Recipient</label>
+        <input type="text" id="transfer-recipient" value="Alice Martin" />
+        <div class="btn-row">
+            <button class="btn-primary" id="btn-transfer">Send transfer</button>
+            <button class="btn-outline" id="btn-reset-bank">Reset</button>
+        </div>
+        <div class="result-box" id="bank-log">Waiting for a transfer...</div>
+    </div>
+
+    <!-- DEMO 2 : Notification center -->
+    <div class="card">
+        <h2>Demo 2 : Real-time notifications</h2>
+        <p class="desc">
+            One model, three views updated at the same time with a single publish call.
+            This is the exact Facebook-style scenario : bell, tab title, and list all in sync.
+        </p>
+        <div class="profile-zone">
+            <div>
+                <div class="notification-bell">
+                    <span id="notif-bell-icon">bell</span>
+                    <span class="notif-badge" id="notif-count-bell">0</span>
+                </div>
+            </div>
+            <div style="flex: 1; font-size: 0.85rem; color: var(--muted);">
+                Tab title counter : <strong id="notif-count-tab">0 notifications</strong><br />
+                Bell counter : <strong id="notif-count-header">0</strong>
+            </div>
+        </div>
+        <div class="btn-row">
+            <button class="btn-primary" id="btn-add-notif">Receive a notification</button>
+            <button class="btn-outline" id="btn-clear-notif">Mark all read</button>
+        </div>
+        <div class="notif-list" id="notif-list"></div>
+    </div>
+
+    <!-- DEMO 3 : Task manager with state -->
+    <div class="card">
+        <h2>Demo 3 : Task manager with state</h2>
+        <p class="desc">
+            Demonstrates the new setState/getState API on models. The view reacts to any
+            state change automatically via the "state.changed" event.
+        </p>
+        <label>New task</label>
+        <input type="text" id="task-input" placeholder="e.g. Review the pull request" />
+        <div class="btn-row">
+            <button class="btn-accent" id="btn-add-task">Add task</button>
+            <button class="btn-outline" id="btn-clear-tasks">Clear all</button>
+        </div>
+        <ul class="task-list" id="task-list"></ul>
+        <div class="result-box" id="task-stats">No tasks yet.</div>
+    </div>
+
+    <!-- DEMO 4 : Profile editor -->
+    <div class="card">
+        <h2>Demo 4 : Live profile editor</h2>
+        <p class="desc">
+            Type in the fields and watch the profile card update instantly.
+            Demonstrates once() : the welcome message fires only the first time you save.
+        </p>
+        <div class="profile-zone">
+            <div class="avatar" id="profile-avatar">F</div>
+            <div class="profile-info">
+                <strong id="profile-name">Fabien Conéjéro</strong>
+                <span id="profile-role">Frontend Developer</span>
+            </div>
+        </div>
+        <label>Full name</label>
+        <input type="text" id="input-name" value="Fabien Conéjéro" />
+        <label>Role</label>
+        <input type="text" id="input-role" value="Frontend Developer" />
+        <div class="btn-row">
+            <button class="btn-primary" id="btn-save-profile">Save profile</button>
+        </div>
+        <div class="result-box" id="profile-status">
+            <span class="status-pill ok">Saved</span> Profile ready.
+        </div>
+    </div>
+
+    <!-- DEMO 5 : Event log / debugger -->
+    <div class="card">
+        <h2>Demo 5 : Event log (new in v1.0.0)</h2>
+        <p class="desc">
+            Every publish call is logged automatically. Use this during development
+            to trace the exact sequence of events across your components.
+        </p>
+        <div class="btn-row">
+            <button class="btn-primary" id="btn-show-log">Show log</button>
+            <button class="btn-outline" id="btn-clear-log">Clear log</button>
+        </div>
+        <div class="log-box" id="event-log">
+            <p>Interact with the demos above, then click "Show log".</p>
+        </div>
+    </div>
+
+    <!-- DEMO 6 : publishAsync -->
+    <div class="card">
+        <h2>Demo 6 : publishAsync (Promise-based)</h2>
+        <p class="desc">
+            Fire an event asynchronously and chain logic after all subscribers
+            have been notified. Useful for loading states and sequential flows.
+        </p>
+        <div class="btn-row">
+            <button class="btn-primary" id="btn-async-start">Run async flow</button>
+        </div>
+        <div class="result-box" id="async-log">Click the button to start.</div>
+    </div>
+
+</div>
+
+<footer>
+    <p>microMVC+ v1.0.0 - Author : Fabien Conéjéro (2026) - MIT License</p>
+</footer>
+
+<script src="micromvc-plus.js"></script>
+<script>
+(function () {
+
+    'use strict';
+
+    // ----------------------------------------------------------------
+    // Bootstrap the application
+    // ----------------------------------------------------------------
+
+    var app = new microMVC.Application();
+
+    // ----------------------------------------------------------------
+    // DEMO 1 : Bank transfer
+    // ----------------------------------------------------------------
+
+    var INITIAL_BALANCE = 2500;
+
+    app.models.add('bankModel', {
+        _balance : INITIAL_BALANCE,
+
+        getBalance : function () {
+            return this._balance;
+        },
+
+        transfer : function (amount, recipient) {
+            if (typeof amount !== 'number' || amount <= 0) {
+                this.publish('transferError', { message : 'Invalid amount.' });
+                return;
+            }
+            if (amount > this._balance) {
+                this.publish('transferError', { message : 'Insufficient funds.' });
+                return;
+            }
+            this._balance = Math.round((this._balance - amount) * 100) / 100;
+            this.publish('balanceChanged', {
+                balance   : this._balance,
+                amount    : amount,
+                recipient : recipient
+            });
+        },
+
+        reset : function () {
+            this._balance = INITIAL_BALANCE;
+            this.publish('balanceChanged', { balance : this._balance, amount : 0, recipient : null });
+        }
+    });
+
+    app.views.add('bankView', {
+        _constructor : function () {
+            this.models.subscribe('bankModel.balanceChanged', this, this.onBalanceChanged);
+            this.models.subscribe('bankModel.transferError',  this, this.onError);
+        },
+
+        onBalanceChanged : function (e) {
+            var el  = document.getElementById('balance-display');
+            var bar = document.getElementById('balance-bar');
+            var log = document.getElementById('bank-log');
+
+            el.textContent = formatEuro(e.balance);
+            el.className   = 'balance' + (e.balance < 0 ? ' negative' : '');
+
+            var pct = Math.max(0, Math.min(100, (e.balance / INITIAL_BALANCE) * 100));
+            bar.style.width = pct + '%';
+
+            if (e.recipient) {
+                log.innerHTML = '<span class="status-pill ok">OK</span> '
+                    + formatEuro(e.amount) + ' sent to ' + e.recipient
+                    + '. New balance : ' + formatEuro(e.balance);
+            } else {
+                log.innerHTML = '<span class="status-pill ok">Reset</span> Balance restored to ' + formatEuro(e.balance);
+            }
+        },
+
+        onError : function (e) {
+            document.getElementById('bank-log').innerHTML =
+                '<span class="status-pill err">Error</span> ' + e.message;
+        }
+    });
+
+    app.controllers.add('bankController', {
+        transfer : function () {
+            var amount    = parseFloat(document.getElementById('transfer-amount').value);
+            var recipient = document.getElementById('transfer-recipient').value.trim() || 'Unknown';
+            this.models.call('bankModel.transfer', { amount : amount, recipient : recipient });
+        },
+        reset : function () {
+            this.models.call('bankModel.reset', null);
+        }
+    });
+
+    document.getElementById('btn-transfer').addEventListener('click', function () {
+        var amount    = parseFloat(document.getElementById('transfer-amount').value);
+        var recipient = document.getElementById('transfer-recipient').value.trim() || 'Unknown';
+        app.models.bankModel.transfer(amount, recipient);
+    });
+
+    document.getElementById('btn-reset-bank').addEventListener('click', function () {
+        app.models.bankModel.reset();
+    });
+
+
+    // ----------------------------------------------------------------
+    // DEMO 2 : Notifications
+    // ----------------------------------------------------------------
+
+    var notifMessages = [
+        'Alice liked your photo.',
+        'Bob commented on your post.',
+        'You have a new friend request.',
+        'Charlie shared your story.',
+        'Your post reached 100 likes.',
+        'New message from Diana.',
+        'Weekly summary is ready.'
+    ];
+
+    var notifIndex = 0;
+
+    app.models.add('notifModel', {
+        _count : 0,
+        _list  : [],
+
+        add : function (message) {
+            this._count++;
+            this._list.unshift({ id : Date.now(), text : message, time : new Date().toLocaleTimeString() });
+            this.publish('updated', { count : this._count, list : this._list });
+        },
+
+        clear : function () {
+            this._count = 0;
+            this._list  = [];
+            this.publish('updated', { count : 0, list : [] });
+        }
+    });
+
+    // Three independent views listening to the same model event
+    app.views.add('notifBellView', {
+        _constructor : function () {
+            this.models.subscribe('notifModel.updated', this, this.render);
+        },
+        render : function (e) {
+            document.getElementById('notif-count-bell').textContent   = e.count;
+            document.getElementById('notif-count-header').textContent = e.count;
+        }
+    });
+
+    app.views.add('notifTabView', {
+        _constructor : function () {
+            this.models.subscribe('notifModel.updated', this, this.render);
+        },
+        render : function (e) {
+            document.getElementById('notif-count-tab').textContent = e.count + ' notification' + (e.count !== 1 ? 's' : '');
+        }
+    });
+
+    app.views.add('notifListView', {
+        _constructor : function () {
+            this.models.subscribe('notifModel.updated', this, this.render);
+        },
+        render : function (e) {
+            var container = document.getElementById('notif-list');
+            container.innerHTML = '';
+            e.list.slice(0, 5).forEach(function (n) {
+                var div = document.createElement('div');
+                div.className   = 'notif-item';
+                div.textContent = n.time + '  ' + n.text;
+                container.appendChild(div);
+            });
+        }
+    });
+
+    document.getElementById('btn-add-notif').addEventListener('click', function () {
+        var msg = notifMessages[notifIndex % notifMessages.length];
+        notifIndex++;
+        app.models.notifModel.add(msg);
+    });
+
+    document.getElementById('btn-clear-notif').addEventListener('click', function () {
+        app.models.notifModel.clear();
+    });
+
+
+    // ----------------------------------------------------------------
+    // DEMO 3 : Task manager using setState / getState
+    // ----------------------------------------------------------------
+
+    app.models.setState('tasks', []);
+
+    app.views.add('taskView', {
+        _constructor : function () {
+            this.models.subscribe('state.changed', this, this.onStateChanged);
+        },
+        onStateChanged : function (e) {
+            if (e.key !== 'tasks') { return; }
+            var tasks = e.value;
+            var list  = document.getElementById('task-list');
+            var stats = document.getElementById('task-stats');
+            list.innerHTML = '';
+
+            tasks.forEach(function (task, i) {
+                var li     = document.createElement('li');
+                li.className = 'task-item' + (task.done ? ' done' : '');
+
+                var cb = document.createElement('input');
+                cb.type    = 'checkbox';
+                cb.checked = task.done;
+                cb.addEventListener('change', function () { toggleTask(i); });
+
+                var span = document.createElement('span');
+                span.textContent = task.text;
+
+                var del = document.createElement('button');
+                del.className   = 'btn-danger';
+                del.textContent = 'X';
+                del.addEventListener('click', function () { deleteTask(i); });
+
+                li.appendChild(cb);
+                li.appendChild(span);
+                li.appendChild(del);
+                list.appendChild(li);
+            });
+
+            var done  = tasks.filter(function (t) { return t.done; }).length;
+            stats.innerHTML = tasks.length === 0
+                ? 'No tasks yet.'
+                : done + ' / ' + tasks.length + ' tasks completed.';
+        }
+    });
+
+    function addTask (text) {
+        var tasks = (app.models.getState('tasks') || []).slice();
+        tasks.push({ text : text, done : false });
+        app.models.setState('tasks', tasks);
+    }
+
+    function toggleTask (index) {
+        var tasks = (app.models.getState('tasks') || []).slice();
+        tasks[index].done = !tasks[index].done;
+        app.models.setState('tasks', tasks);
+    }
+
+    function deleteTask (index) {
+        var tasks = (app.models.getState('tasks') || []).slice();
+        tasks.splice(index, 1);
+        app.models.setState('tasks', tasks);
+    }
+
+    document.getElementById('btn-add-task').addEventListener('click', function () {
+        var input = document.getElementById('task-input');
+        var text  = input.value.trim();
+        if (!text) { return; }
+        addTask(text);
+        input.value = '';
+    });
+
+    document.getElementById('task-input').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { document.getElementById('btn-add-task').click(); }
+    });
+
+    document.getElementById('btn-clear-tasks').addEventListener('click', function () {
+        app.models.setState('tasks', []);
+    });
+
+
+    // ----------------------------------------------------------------
+    // DEMO 4 : Profile editor with once()
+    // ----------------------------------------------------------------
+
+    app.models.add('profileModel', {
+        _data : { name : 'Fabien Conéjéro', role : 'Frontend Developer' },
+
+        save : function (name, role) {
+            this._data = { name : name, role : role };
+            this.publish('saved', { name : name, role : role });
+        },
+
+        get : function () { return this._data; }
+    });
+
+    // once() : the welcome toast fires only on the first save
+    app.models.once('profileModel.saved', null, function (e) {
+        var status = document.getElementById('profile-status');
+        status.innerHTML = '<span class="status-pill ok">Welcome</span> First save recorded for ' + e.name + ' !';
+    });
+
+    app.views.add('profileView', {
+        _constructor : function () {
+            this.models.subscribe('profileModel.saved', this, this.render);
+        },
+        render : function (e) {
+            document.getElementById('profile-name').textContent   = e.name;
+            document.getElementById('profile-role').textContent   = e.role;
+            document.getElementById('profile-avatar').textContent = e.name.charAt(0).toUpperCase();
+
+            var status = document.getElementById('profile-status');
+            if (!status.innerHTML.includes('Welcome')) {
+                status.innerHTML = '<span class="status-pill ok">Saved</span> Profile updated successfully.';
+            }
+        }
+    });
+
+    document.getElementById('btn-save-profile').addEventListener('click', function () {
+        var name = document.getElementById('input-name').value.trim() || 'Anonymous';
+        var role = document.getElementById('input-role').value.trim() || 'No role';
+        app.models.profileModel.save(name, role);
+    });
+
+
+    // ----------------------------------------------------------------
+    // DEMO 5 : Event log viewer
+    // ----------------------------------------------------------------
+
+    document.getElementById('btn-show-log').addEventListener('click', function () {
+        var container = document.getElementById('event-log');
+        var log       = app.models.getLog()
+            .concat(app.controllers.getLog())
+            .concat(app.views.getLog())
+            .sort(function (a, b) { return a.time - b.time; });
+
+        if (log.length === 0) {
+            container.innerHTML = '<p>No events recorded yet.</p>';
+            return;
+        }
+
+        container.innerHTML = log.map(function (entry) {
+            var t   = new Date(entry.time).toLocaleTimeString('en', { hour12 : false, hour : '2-digit', minute : '2-digit', second : '2-digit' });
+            var val = JSON.stringify(entry.event).slice(0, 60);
+            return '<p><span class="ts">' + t + '</span>'
+                + '<span class="ctx">' + entry.context + '</span> '
+                + '<span class="val">' + val + '</span></p>';
+        }).join('');
+
+        container.scrollTop = container.scrollHeight;
+    });
+
+    document.getElementById('btn-clear-log').addEventListener('click', function () {
+        app.models.clearLog();
+        app.controllers.clearLog();
+        app.views.clearLog();
+        document.getElementById('event-log').innerHTML = '<p>Log cleared.</p>';
+    });
+
+
+    // ----------------------------------------------------------------
+    // DEMO 6 : publishAsync
+    // ----------------------------------------------------------------
+
+    app.models.add('asyncModel', {
+        _step : 0,
+
+        runFlow : function () {
+            this._step = 0;
+            this.publish('flowStep', { step : 0, message : 'Starting async flow...' });
+        }
+    });
+
+    app.views.add('asyncView', {
+        _constructor : function () {
+            this.models.subscribe('asyncModel.flowStep', this, this.render);
+        },
+        render : function (e) {
+            var log = document.getElementById('async-log');
+            log.innerHTML += (e.step === 0 ? '' : '<br />') + 'Step ' + e.step + ' : ' + e.message;
+        }
+    });
+
+    document.getElementById('btn-async-start').addEventListener('click', function () {
+        document.getElementById('async-log').innerHTML = '';
+
+        app.models.asyncModel.publish('flowStep', { step : 0, message : 'Flow started.' });
+
+        app.models.publishAsync('asyncModel.flowStep', { step : 1, message : 'Data fetched from API (simulated).' })
+            .then(function () {
+                return app.models.publishAsync('asyncModel.flowStep', { step : 2, message : 'Response validated.' });
+            })
+            .then(function () {
+                return app.models.publishAsync('asyncModel.flowStep', { step : 3, message : 'UI updated. Done.' });
+            });
+    });
+
+
+    // ----------------------------------------------------------------
+    // Utility
+    // ----------------------------------------------------------------
+
+    function formatEuro (amount) {
+        return amount.toLocaleString('fr-FR', { style : 'currency', currency : 'EUR' });
+    }
+
+}());
+</script>
+
+</body>
+</html>
