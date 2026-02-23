@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Popup Blocker Pro — Live Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── Variables ── */
+  :root {
+    --bg:          #0a0b0f;
+    --surface:     #111318;
+    --surface2:    #1a1d26;
+    --border:      #2a2d3a;
+    --accent:      #6c63ff;
+    --accent2:     #ff6b6b;
+    --accent3:     #00d4aa;
+    --text:        #e8eaf0;
+    --muted:       #6b7080;
+    --warn:        #ffb347;
+    --ext-bg:      #1e2030;
+    --ext-border:  #3a3d5c;
+    --chrome-gray: #3c4043;
+    --chrome-blue: #1a73e8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Animated background grid ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(108,99,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(108,99,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Layout ── */
+  .wrapper { position: relative; z-index: 1; }
+
+  /* ── Header ── */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,11,15,0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent), #a78bfa);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .badge-demo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    background: var(--accent2);
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    animation: pulse-badge 2s ease-in-out infinite;
+  }
+  @keyframes pulse-badge {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.65; }
+  }
+  .install-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .install-btn:hover { background: #5a52e0; transform: translateY(-1px); }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: 64px 24px 48px;
+  }
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent3);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    line-height: 1.65;
+  }
+
+  /* ── Demo Arena ── */
+  .demo-arena {
+    max-width: 980px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+
+  /* Fake browser chrome */
+  .browser-chrome {
+    border-radius: 12px 12px 0 0;
+    background: var(--chrome-gray);
+    padding: 12px 16px 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+  }
+  .traffic-lights { display: flex; gap: 7px; }
+  .traffic-lights span {
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .tl-red    { background: #ff5f57; }
+  .tl-yellow { background: #febc2e; }
+  .tl-green  { background: #28c840; }
+
+  .address-bar {
+    flex: 1;
+    background: #282c33;
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    color: #bbb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .address-bar .lock { color: #4caf50; font-size: 0.85em; }
+  .ext-icon-bar {
+    width: 28px; height: 28px;
+    background: linear-gradient(135deg, var(--accent), #a78bfa);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .ext-icon-bar:hover { transform: scale(1.1); }
+  .ext-badge {
+    position: absolute;
+    top: -5px; right: -5px;
+    background: var(--accent2);
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--chrome-gray);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: scale(0.5);
+  }
+  .ext-badge.visible { opacity: 1; transform: scale(1); }
+
+  /* Browser viewport */
+  .browser-viewport {
+    background: #f1f3f4;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    min-height: 440px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Fake sketchy site inside viewport */
+  .fake-site {
+    background: #fff;
+    min-height: 440px;
+    padding: 0;
+    position: relative;
+  }
+  .fake-site-header {
+    background: linear-gradient(135deg, #c0392b, #922b21);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: Georgia, serif;
+  }
+  .fake-site-logo { color: #fff; font-size: 1.1rem; font-weight: bold; }
+  .fake-site-nav {
+    margin-left: auto;
+    display: flex;
+    gap: 16px;
+  }
+  .fake-site-nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
+  .fake-site-body {
+    padding: 24px 28px;
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+  .fake-site-body h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #222;
+  }
+  .fake-site-body p { color: #555; font-size: 0.9rem; line-height: 1.6; margin-bottom: 14px; }
+  .fake-play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #c0392b;
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    transition: background 0.2s;
+    margin-top: 6px;
+  }
+  .fake-play-btn:hover { background: #a93226; }
+  .fake-ads {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .fake-ad {
+    flex: 1;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 0.75rem;
+    color: #999;
+    text-align: center;
+  }
+  .fake-ad strong { display: block; color: #555; margin-bottom: 4px; }
+
+  /* ── EXTENSION POPUP OVERLAY ── */
+  /* The "fake extension" notification that slides in */
+  .ext-popup {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 340px;
+    background: var(--ext-bg);
+    border: 1px solid var(--ext-border);
+    border-radius: 14px;
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(108,99,255,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    transform: translateY(-20px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease;
+    z-index: 50;
+    overflow: hidden;
+  }
+  .ext-popup.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .ext-popup-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--ext-border);
+    position: relative;
+  }
+  .ext-popup-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), #a78bfa);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    animation: icon-pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes icon-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(108,99,255,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(108,99,255,0); }
+  }
+  .ext-popup-title {
+    flex: 1;
+    font-family: 'Syne', sans-serif;
+  }
+  .ext-popup-title strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .ext-popup-title span {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+  .ext-popup-close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .ext-popup-close:hover { color: #fff; background: rgba(255,255,255,0.08); }
+
+  .ext-popup-body {
+    padding: 16px;
+  }
+  .blocked-url-box {
+    background: rgba(255,107,107,0.1);
+    border: 1px solid rgba(255,107,107,0.25);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .blocked-url-box .warn-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  .blocked-url-box .url-info {}
+  .blocked-url-box .url-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 3px;
+  }
+  .blocked-url-box .url-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: #e0e0e0;
+    word-break: break-all;
+  }
+
+  .ext-popup-question {
+    font-size: 0.88rem;
+    color: #c8cad4;
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+  .ext-popup-question strong { color: #fff; }
+
+  .ext-popup-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .btn-block {
+    flex: 1;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 11px 16px;
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-block:hover { background: #5a52e0; transform: translateY(-1px); }
+  .btn-block:active { transform: translateY(0); }
+  .btn-allow {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 11px 16px;
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, transform 0.1s;
+    flex: 1;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-allow:hover { border-color: var(--accent3); color: var(--accent3); transform: translateY(-1px); }
+
+  .ext-popup-footer {
+    padding: 10px 16px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    border-top: 1px solid var(--ext-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent3);
+    animation: blink 1.2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ── Toast notification ── */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 1000;
+    display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .toast.toast-block { border-color: rgba(108,99,255,0.5); }
+  .toast.toast-allow { border-color: rgba(0,212,170,0.5); }
+
+  /* ── Stats strip ── */
+  .stats-strip {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    padding: 20px 24px;
+    max-width: 980px;
+    margin: 0 auto 40px;
+  }
+  .stat-card {
+    flex: 1;
+    max-width: 220px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+  .stat-card:hover { border-color: var(--accent); }
+  .stat-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+    transition: color 0.3s;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── Controls ── */
+  .controls {
+    text-align: center;
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding: 0 24px;
+  }
+  .ctrl-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .ctrl-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .ctrl-btn.primary:hover { background: #5a52e0; }
+
+  /* ── Log ── */
+  .log-section {
+    max-width: 980px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+  .log-header {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .log-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .log-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    min-height: 120px;
+    max-height: 200px;
+    overflow-y: auto;
+    color: var(--accent3);
+    line-height: 1.8;
+  }
+  .log-box::-webkit-scrollbar { width: 6px; }
+  .log-box::-webkit-scrollbar-track { background: transparent; }
+  .log-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  .log-entry { animation: fade-in-log 0.3s ease; }
+  .log-entry.blocked { color: var(--accent2); }
+  .log-entry.allowed { color: var(--accent3); }
+  .log-entry.info    { color: var(--muted); }
+  @keyframes fade-in-log {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ── CTA section ── */
+  .cta-section {
+    text-align: center;
+    padding: 60px 24px 80px;
+    border-top: 1px solid var(--border);
+    background: linear-gradient(to bottom, transparent, rgba(108,99,255,0.05));
+  }
+  .cta-section h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+  .cta-section p { color: var(--muted); margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn-chrome {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--chrome-blue);
+    color: #fff; text-decoration: none;
+    padding: 13px 26px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-chrome:hover { background: #1558b0; transform: translateY(-2px); }
+  .btn-firefox {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #e66000;
+    color: #fff; text-decoration: none;
+    padding: 13px 26px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-firefox:hover { background: #c45500; transform: translateY(-2px); }
+  .btn-github {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text); text-decoration: none;
+    padding: 13px 26px; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-github:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  /* ── Shake animation ── */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+  }
+  .shake { animation: shake 0.4s ease; }
+
+  /* ── Blocked overlay on viewport ── */
+  .blocked-flash {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,107,107,0.08);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 10;
+    border-radius: 0 0 12px 12px;
+  }
+  .blocked-flash.flash {
+    animation: flash-anim 0.5s ease;
+  }
+  @keyframes flash-anim {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* Instructions */
+  .instruction {
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding: 8px 24px 24px;
+  }
+  .instruction span { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 14px 16px; }
+    .demo-arena { padding: 0 12px; }
+    .ext-popup { width: 300px; right: 8px; }
+    .stats-strip { gap: 8px; }
+    .fake-ads { display: none; }
+    .address-bar .url-text { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo">
+      <div class="logo-icon">🍿</div>
+      Popup Blocker Pro
+      <span class="badge-demo">LIVE DEMO</span>
+    </div>
+    <a class="install-btn" href="https://github.com/madjeek-web/Popup-Blocker-Pro" target="_blank" rel="noopener">
+      ⬇️ Install Free
+    </a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-eyebrow">▶ Interactive Simulation</p>
+    <h1>See it block popups<br>in real time</h1>
+    <p>No extension needed to watch this demo. Interact with the fake browser below and see exactly how Popup Blocker Pro intercepts unwanted popups — before convincing you to install it.</p>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-strip">
+    <div class="stat-card">
+      <div class="stat-value" id="stat-blocked">0</div>
+      <div class="stat-label">Popups Blocked</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-allowed" style="color:var(--accent3)">0</div>
+      <div class="stat-label">Popups Allowed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="stat-attempts" style="color:var(--warn)">0</div>
+      <div class="stat-label">Attempts Detected</div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="ctrl-btn primary" onclick="triggerPopupAttempt('auto')">▶ Simulate Auto Popup</button>
+    <button class="ctrl-btn" onclick="triggerPopupAttempt('delayed')">⏱ Delayed Popup (1s)</button>
+    <button class="ctrl-btn" onclick="triggerPopupAttempt('burst')">💥 Burst × 3</button>
+    <button class="ctrl-btn" onclick="resetDemo()">↺ Reset</button>
+  </div>
+  <p class="instruction">Click a button above, or click <span>▶ PLAY NOW</span> inside the fake site below</p>
+
+  <!-- Demo Arena: Fake Browser -->
+  <div class="demo-arena">
+    <div class="browser-chrome">
+      <div class="traffic-lights">
+        <span class="tl-red"></span>
+        <span class="tl-yellow"></span>
+        <span class="tl-green"></span>
+      </div>
+      <div class="address-bar">
+        <span class="lock">🔒</span>
+        <span class="url-text">freemovies-streaming.net/watch?v=amazing-film</span>
+      </div>
+      <!-- Extension icon in toolbar -->
+      <div class="ext-icon-bar" title="Popup Blocker Pro is active" onclick="showExtPopupPanel()">
+        🍿
+        <div class="ext-badge" id="toolbar-badge">0</div>
+      </div>
+    </div>
+
+    <div class="browser-viewport">
+      <!-- Red flash overlay on block -->
+      <div class="blocked-flash" id="blocked-flash"></div>
+
+      <!-- Fake sketchy streaming site -->
+      <div class="fake-site">
+        <div class="fake-site-header">
+          <div class="fake-site-logo">🎬 FreeMovies4K</div>
+          <nav class="fake-site-nav">
+            <a href="#">Movies</a>
+            <a href="#">Series</a>
+            <a href="#">Sign In</a>
+          </nav>
+        </div>
+        <div class="fake-site-body">
+          <h2>Watch: "The Matrix Reloaded" — Full HD FREE!</h2>
+          <p>Stream the latest blockbusters without subscription. No registration required. Just click play and enjoy in 4K quality.</p>
+          <p style="color:#c0392b;font-size:0.8rem;font-weight:bold;">⚠️ Note: This site may open additional windows for its "video player"</p>
+          <button class="fake-play-btn" onclick="triggerPopupAttempt('click')">
+            ▶ PLAY NOW — FREE
+          </button>
+          <div class="fake-ads">
+            <div class="fake-ad"><strong>AD</strong>You're a WINNER!<br><small style="color:#c0392b">Click to claim prize</small></div>
+            <div class="fake-ad"><strong>AD</strong>Meet singles nearby!<br><small>100% FREE signup</small></div>
+            <div class="fake-ad"><strong>AD</strong>Your PC is at RISK<br><small style="color:#c0392b">Download cleaner now</small></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── THE FAKE EXTENSION POPUP ── -->
+      <div class="ext-popup" id="ext-popup">
+        <div class="ext-popup-header">
+          <div class="ext-popup-icon">🍿</div>
+          <div class="ext-popup-title">
+            <strong>Popup Blocker Pro</strong>
+            <span>Extension · Active on this tab</span>
+          </div>
+          <button class="ext-popup-close" onclick="dismissPopup()">✕</button>
+        </div>
+
+        <div class="ext-popup-body">
+          <div class="blocked-url-box">
+            <span class="warn-icon">⚠️</span>
+            <div class="url-info">
+              <div class="url-label">🚫 Blocked popup attempt</div>
+              <div class="url-value" id="popup-url">javascript:void(0)</div>
+            </div>
+          </div>
+
+          <p class="ext-popup-question">
+            <strong>This page tried to open a new tab without your permission.</strong><br>
+            The request was automatically intercepted. Would you like to allow it this time?
+          </p>
+
+          <div class="ext-popup-actions">
+            <button class="btn-block" onclick="onBlock()">🛡 Keep Blocked</button>
+            <button class="btn-allow" onclick="onAllow()">↗ Allow Once</button>
+          </div>
+        </div>
+
+        <div class="ext-popup-footer">
+          <div class="status-dot"></div>
+          Protection active · <span id="popup-count-label">1 attempt blocked this session</span>
+        </div>
+      </div>
+
+    </div><!-- /browser-viewport -->
+  </div><!-- /demo-arena -->
+
+  <!-- Event Log -->
+  <div class="log-section">
+    <div class="log-header">Event Log</div>
+    <div class="log-box" id="log-box">
+      <div class="log-entry info">[SYSTEM] Popup Blocker Pro demo initialized. Ready to intercept.</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Convinced? Protect yourself now.</h2>
+    <p>Free, open-source, no data collection. Install in under 60 seconds.</p>
+    <div class="cta-buttons">
+      <a class="btn-chrome"
+         href="https://github.com/madjeek-web/Popup-Blocker-Pro/raw/main/releases/popup-blocker-pro-chrome.zip"
+         target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        Chrome / Edge / Brave
+      </a>
+      <a class="btn-firefox"
+         href="https://github.com/madjeek-web/Popup-Blocker-Pro/raw/main/releases/popup-blocker-pro-firefox.zip"
+         target="_blank" rel="noopener">
+        🦊 Firefox
+      </a>
+      <a class="btn-github"
+         href="https://github.com/madjeek-web/Popup-Blocker-Pro"
+         target="_blank" rel="noopener">
+        ⭐ View on GitHub
+      </a>
+    </div>
+  </section>
+
+</div><!-- /wrapper -->
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── State ── */
+let blockedCount = 0;
+let allowedCount = 0;
+let attemptsCount = 0;
+let pendingUrl = '';
+let burstTimeout = null;
+
+const FAKE_URLS = [
+  'https://freemovies4k.net/track?ad=2847&ref=popup',
+  'https://casino-win-free.biz/offer?uid=48291',
+  'https://prize-winner-2025.com/claim?token=xFrQ',
+  'https://download-cleaner-pro.net/install.exe',
+  'https://singles-near-you.biz/?click=popup&src=site',
+];
+
+/* ── Core logic ── */
+function triggerPopupAttempt(type) {
+  if (type === 'burst') {
+    let count = 0;
+    const interval = setInterval(() => {
+      if (count >= 3) { clearInterval(interval); return; }
+      const url = FAKE_URLS[count % FAKE_URLS.length];
+      setTimeout(() => doAttempt(url), count * 600);
+      count++;
+    }, 10);
+    return;
+  }
+
+  const url = FAKE_URLS[attemptsCount % FAKE_URLS.length];
+
+  if (type === 'delayed') {
+    addLog('info', '[DETECT] Deferred popup scheduled via setTimeout — waiting 1s...');
+    setTimeout(() => doAttempt(url), 1000);
+    return;
+  }
+
+  doAttempt(url);
+}
+
+function doAttempt(url) {
+  attemptsCount++;
+  pendingUrl = url;
+  updateStats();
+  addLog('blocked', `[INTERCEPT] window.open("${url}") — blocked before tab opened`);
+  showExtPopup(url);
+  flashViewport();
+  updateBadge();
+}
+
+function showExtPopup(url) {
+  const popup = document.getElementById('ext-popup');
+  const urlEl = document.getElementById('popup-url');
+  const countLabel = document.getElementById('popup-count-label');
+
+  const shortUrl = url.length > 48 ? url.substring(0, 45) + '...' : url;
+  urlEl.textContent = shortUrl;
+  countLabel.textContent = `${blockedCount + 1} attempt${blockedCount + 1 !== 1 ? 's' : ''} blocked this session`;
+
+  popup.classList.add('show');
+}
+
+function showExtPopupPanel() {
+  const popup = document.getElementById('ext-popup');
+  popup.classList.toggle('show');
+}
+
+function dismissPopup() {
+  document.getElementById('ext-popup').classList.remove('show');
+}
+
+function onBlock() {
+  blockedCount++;
+  dismissPopup();
+  updateStats();
+  addLog('blocked', `[BLOCKED] Popup suppressed. User chose: Keep Blocked.`);
+  showToast('🛡️ Popup blocked — tab never opened!', 'block');
+  updateBadge();
+}
+
+function onAllow() {
+  allowedCount++;
+  dismissPopup();
+  updateStats();
+  addLog('allowed', `[ALLOWED] User authorized: opening ${pendingUrl}`);
+  showToast('↗ Opening allowed by user', 'allow');
+  // Actually open it for real if user allows
+  try { window.open(pendingUrl, '_blank', 'noopener'); } catch(e) {}
+}
+
+function flashViewport() {
+  const el = document.getElementById('blocked-flash');
+  el.classList.remove('flash');
+  void el.offsetWidth; // force reflow
+  el.classList.add('flash');
+}
+
+function updateBadge() {
+  const badge = document.getElementById('toolbar-badge');
+  const total = blockedCount + attemptsCount - blockedCount - allowedCount;
+  const n = attemptsCount;
+  badge.textContent = n;
+  badge.classList.add('visible');
+}
+
+function updateStats() {
+  animateCounter('stat-blocked', blockedCount);
+  animateCounter('stat-allowed', allowedCount);
+  animateCounter('stat-attempts', attemptsCount);
+}
+
+function animateCounter(id, target) {
+  const el = document.getElementById(id);
+  const current = parseInt(el.textContent) || 0;
+  if (current === target) return;
+  const step = target > current ? 1 : -1;
+  const interval = setInterval(() => {
+    const val = parseInt(el.textContent) || 0;
+    if (val === target) { clearInterval(interval); return; }
+    el.textContent = val + step;
+  }, 60);
+}
+
+function addLog(type, message) {
+  const box = document.getElementById('log-box');
+  const now = new Date();
+  const ts = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}.${String(now.getMilliseconds()).padStart(3,'0')}`;
+  const el = document.createElement('div');
+  el.className = `log-entry ${type}`;
+  el.textContent = `[${ts}] ${message}`;
+  box.appendChild(el);
+  box.scrollTop = box.scrollHeight;
+}
+
+function showToast(msg, type) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = `toast toast-${type} show`;
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function resetDemo() {
+  blockedCount = 0;
+  allowedCount = 0;
+  attemptsCount = 0;
+  pendingUrl = '';
+  updateStats();
+  dismissPopup();
+  document.getElementById('log-box').innerHTML =
+    '<div class="log-entry info">[SYSTEM] Demo reset. Ready to intercept.</div>';
+  const badge = document.getElementById('toolbar-badge');
+  badge.textContent = '0';
+  badge.classList.remove('visible');
+}
+
+/* ── Auto-trigger on load (after 2.5s) to show the magic immediately ── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    addLog('info', '[AUTO] Page load detected script trying to open popup silently...');
+    triggerPopupAttempt('auto');
+  }, 2500);
+});
+</script>
+</body>
+</html>
