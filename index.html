@@ -36,7 +36,7 @@ profile="http://www.w3.org/1999/xhtml/vocab http://www.w3.org/2002/08/xhtml/xhtm
 <meta http-equiv="imagetoolbar" content="no"><meta http-equiv="x-ua-compatible" content="ie=edge"><!-- OFF  <meta http-equiv="Content-Security-Policy" content="script-src 'self'"> -->
 <!-- Géolocalisation -->
 <meta name="geo.region" content="FR"><meta name="geo.placename" content="Paris"><meta name="geo.position" content="48.8566;2.3522"><meta name="ICBM" content="48.8566, 2.3522">
-<!-- Données temporelles --><meta name="coverage" content="2009-01-01/2200-12-31"><meta name="dateCreated" content="2009-01-01"><meta name="dateModified" content="2025-08-20">
+<!-- Données temporelles --><meta name="coverage" content="2009-01-01/2200-12-31"><meta name="dateCreated" content="2009-01-01"><meta name="dateModified" content="2026-04-01">
 <!-- Microdonnées étendues -->
 <meta property="schema:accessibilityFeature" content="alternativeText">
 <meta property="schema:accessibilityHazard" content="none">
@@ -65,27 +65,6 @@ Compatibilité avec les outils d'analyse sémantique -->
 	
 <meta charset="utf-8" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script defer>
-// Blocage clic droit Version complète (bloque aussi les touches F12 et Ctrl+Shift+I), (Ce blocage est facile à contourner (via les options du navigateur ou en désactivant JavaScript)
-// Alternatives : Pour une vraie protection, utilisez :
-// Watermarking pour les images
-// Protection DRM pour les médias
-// Authentification pour le contenu sensible
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-        
-        // Blocage inspecteur (F12/Ctrl+Shift+I)
-        document.onkeydown = function(e) {
-            if (e.key === "F12" || 
-                (e.ctrlKey && e.shiftKey && e.key === "I") || 
-                (e.ctrlKey && e.shiftKey && e.key === "J") || 
-                (e.ctrlKey && e.key === "U")) {
-                e.preventDefault();
-                return false;
-            }
-        };
-</script>
 
 <!-- ******************************************************************************************************************************** -->
 <!-- Lien primaire FOAF -->
@@ -109,26 +88,108 @@ Vérifiez avec Web-Sniffer que les en-têtes sont corrects -->
 Ajoutez ce script pour permettre aux navigateurs de détecter votre FOAF : -->
 <script type="application/ld+json" defer>
 {
-  "@context": "http://schema.org",
-  "@type": "Person",
-  "name": "Fabien Conéjéro",
-  "url": "https://madjeek-web.github.io/",
-  "sameAs": "https://madjeek-web.github.io/foaf.xml"
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://madjeek-web.github.io/#fabien-conejero",
+      "name": "Fabien Conéjéro",
+      "alternateName": ["FC84", "Fabien Conejero"],
+      "url": "https://madjeek-web.github.io/",
+      "image": "https://avatars.githubusercontent.com/u/83957788?v=4",
+      "sameAs": [
+        "https://madjeek-web.github.io/foaf.xml",
+        "https://github.com/madjeek-web",
+        "https://github.com/Convergence-Human-And-Technology",
+        "https://www.linkedin.com/company/convergence-organization",
+        "https://convergence-human-technology.github.io/site"
+      ],
+      "jobTitle": "CEO & Founder",
+      "worksFor": {
+        "@type": "Organization",
+        "@id": "https://convergence-human-technology.github.io/site#convergence",
+        "name": "Convergence Human And Technology"
+      },
+      "knowsAbout": [
+        "Artificial Intelligence", "Executive AI Systems", "AI Agents", "LLM", "RAG",
+        "Business Process Automation", "n8n", "Make", "Zapier", "Power Automate",
+        "Full-Stack Development", "React", "Next.js", "PHP 8.3", "Symfony 7", "Python", "Node.js",
+        "SEO", "SMO", "GEO", "AEO", "Technical SEO", "Schema.org", "Semantic HTML",
+        "Project Management", "Agile", "Scrum", "Kanban", "Design Thinking",
+        "Software Architecture", "API Design", "REST", "GraphQL", "Docker", "Kubernetes",
+        "UI/UX Design", "Graphic Design", "Adobe Creative Suite", "Figma", "Leonardo AI",
+        "Digital Transformation", "ESN", "B2B Software", "B2C Software", "Desktop Software"
+      ],
+      "hasOccupation": [
+        {
+          "@type": "Occupation",
+          "name": "CEO & Founder - Convergence Human And Technology",
+          "startDate": "2026-03",
+          "occupationLocation": { "@type": "Country", "name": "France" }
+        },
+        {
+          "@type": "Occupation",
+          "name": "Web Agency Director & Full-Stack Developer",
+          "startDate": "2008",
+          "endDate": "2025",
+          "occupationLocation": { "@type": "Country", "name": "France" }
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://convergence-human-technology.github.io/site#convergence",
+      "name": "Convergence Human And Technology",
+      "alternateName": "Convergence H&T",
+      "url": "https://convergence-human-technology.github.io/site",
+      "email": "convergence-tech@proton.me",
+      "foundingDate": "2026-03",
+      "founder": { "@type": "Person", "name": "Fabien Conéjéro" },
+      "description": "ESN specialized in executive AI systems for everyday life and industrial environments. Private and paid desktop software B2B & B2C. Business automation, AI integration, digital transformation consulting.",
+      "areaServed": "Worldwide",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "FR"
+      },
+      "sameAs": [
+        "https://github.com/Convergence-Human-And-Technology",
+        "https://www.linkedin.com/company/convergence-organization",
+        "https://www.facebook.com/people/Convergence-Human-And-Technology/61578483081894"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://madjeek-web.github.io/#website",
+      "url": "https://madjeek-web.github.io/",
+      "name": "Fabien Conéjéro / FC84",
+      "description": "Portfolio and professional profile of Fabien Conéjéro, CEO of Convergence Human And Technology.",
+      "author": { "@type": "Person", "@id": "https://madjeek-web.github.io/#fabien-conejero" },
+      "dateModified": "2026-04-01",
+      "inLanguage": "fr-FR"
+    }
+  ]
 }
 </script>
 <!-- ******************************************************************************************************************************** -->
 
 <meta name="robots" content="follow, index" /><meta name="googlebot" content="index, follow" />
-<title itemprop='name' dc:title>Fabien Conéjéro / FC84</title>
-<meta name="description" itemprop="description" content="Fabien Conéjéro - Project And Team Management - Artistic Director / Creative - Senior Front-End Developer - Full Expert SEO / SMO - Web designer / Graphic - Community Manager / Social Media - API" />
-<meta name="keywords" content="Fabien Conéjéro, FC84, Project Management, Team Management, Artistic Director, Creative Director, Senior Front-End Developer, Frontend Development, Full Stack SEO, Expert SMO, Search Engine Optimization, Social Media Optimization, Web Design, Graphic Design, UI/UX Design, Community Management, Social Media Strategy, API Integration, Web Development, Digital Strategy, Creative Solutions">
-<meta name="news_keywords" content="Fabien Conéjéro, FC84, Creative Technology Leadership, Project Management Trends, Agile Team Management, Artistic Direction in Tech, Creative Direction 2024, Senior Front-End Development, React/Next.js Innovations, Modern Frontend Architecture, Full-Stack SEO Strategies, SMO Expert Techniques, Search Engine Optimization Updates, Social Media Algorithm Trends, Web Design Evolution, Graphic Design for Digital, UI/UX Engineering, Community Management 2.0, Social Media Growth Strategies, API-First Development, Web Development Forecasts, Digital Strategy Insights, Creative Tech Solutions, AI in Web Design, Web3 Interfaces, Blockchain for Creatives, Developer Relations, Tech Leadership">
+<title itemprop='name' dc:title>Fabien Conéjéro - CEO Convergence H&T | Full-Stack Developer | AI Expert | FC84</title>
+<meta name="description" itemprop="description" content="Fabien Conéjéro - CEO &amp; Founder, Convergence Human And Technology. Full-Stack Developer, AI Systems Expert, Expert SEO/SMO/GEO, Project Manager. 16+ years of digital innovation. FC84." />
+<meta name="keywords" content="Fabien Conéjéro, FC84, Convergence Human And Technology, Convergence H&T, CEO France, Founder ESN, executive AI, AI systems, AI agents, LLM, agentic AI, business automation, n8n, Make, Zapier, Power Automate, Claude Anthropic, OpenAI GPT, Mistral, Llama, RAG, embeddings, Python, Node.js, REST API, GraphQL, Webhooks, Supabase, PostgreSQL, Docker, Kubernetes, Full-Stack Developer, React, Next.js, TailwindCSS, PHP, Symfony, Project Management, Artistic Director, Senior Front-End Developer, SEO expert, SMO expert, GEO optimization, AEO, AI-powered SEO, Web Designer, Graphic Designer, UI/UX, API integration, digital transformation, software architecture, desktop software B2B B2C, Lovable, Retool, Streamlit, Airtable, Salesforce, HubSpot, Odoo, Agile, Scrum, Kanban, Adobe Creative Suite, Figma, Leonardo AI, France, 2026">
+<meta name="news_keywords" content="Fabien Conéjéro, FC84, Convergence Human And Technology, CEO France 2026, executive AI systems, AI agents 2026, business automation 2026, LLM integration, agentic AI workflows, n8n automation, GEO optimization 2026, AEO answer engine optimization, RAG systems, Full-Stack Developer 2026, React Next.js 2026, AI-powered development, digital transformation France, ESN IA France, SEO expert 2026, SMO strategy 2026, desktop software innovation, software architecture AI, Python AI development, Node.js automation, tech startup, French AI company, Convergence H&T">
 
 <meta name="doc-type" content="public">
-<meta property="og:title" content="Fabien Conéjéro / FC84" />
-<meta property="og:description" content="Fabien Conéjéro - Project And Team Management - Artistic Director / Creative - Senior Front-End Developer - Full Expert SEO / SMO - Web designer / Graphic - Community Manager / Social Media - API" />
-<meta property="og:site_name" content="Fabien Conéjéro / FC84 - GITHUB" /><meta property="og:type" content="website" />
+<meta property="og:title" content="Fabien Conéjéro - CEO Convergence H&T | Full-Stack Developer | AI Expert | FC84" />
+<meta property="og:description" content="Fabien Conéjéro - CEO &amp; Founder, Convergence Human And Technology. Full-Stack Developer, AI Systems Expert, Expert SEO/SMO/GEO, Project Manager. 16+ years of digital innovation. FC84." />
+<meta property="og:site_name" content="Fabien Conéjéro - Convergence Human And Technology | FC84" /><meta property="og:type" content="website" />
 <meta property="og:url" content="https://madjeek-web.github.io/" />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Fabien Conéjéro - CEO Convergence H&T | Full-Stack Developer | AI Expert" />
+<meta name="twitter:description" content="CEO &amp; Founder of Convergence Human And Technology. Full-Stack Developer, AI Expert, Expert SEO/SMO/GEO. 16+ years of digital innovation. FC84." />
+<!-- Author & Canonical -->
+<meta name="author" content="Fabien Conéjéro - FC84" />
+<link rel="canonical" href="https://madjeek-web.github.io/" />
 
 <meta name="MobileOptimized" content="width" /><meta name="HandheldFriendly" content="true" /><meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -433,7 +494,7 @@ Les valeurs courantes index, follow et archive déterminent si une page doit êt
     -webkit-user-drag: none;
 	/* Rend invisible pour les robots :
     -moz-text-security: disc; /* Masque le texte (Firefox)
-    text-security: disc; /* Future norme CSS */
+    text-security: disc; /* Future norme CSS */}
     </style>
 
 <script defer>
@@ -1122,11 +1183,11 @@ Conférenciers aux Google Webmaster Conferences (ex : John Mueller). -->
 <!-- ******************************************************************************************************************************** -->
 </head>
     
-<body class="protected-content" vocab="https://schema.org/" typeof="WebPage Person" resource="#webpage" prefix="foaf: http://xmlns.com/foaf/0.1/ dc: http://purl.org/dc/terms/
+<body class="no-protected-content" vocab="https://schema.org/" typeof="WebPage Person" resource="#webpage" prefix="foaf: http://xmlns.com/foaf/0.1/ dc: http://purl.org/dc/terms/
       xsd: http://www.w3.org/2001/XMLSchema#" data-ref="Configuration RDFa certifiée W3C AAA - Compatible INA et projets européens">
 
   <!-- Métadonnées critiques -->
-  <meta property="dc:publisher" content="Fabien Conéjéro / FC84"/><meta property="dc:creator" content="https://github.com/madjeek-web"/><meta property="dc:date" datatype="xsd:date" content="2025-08-20"/>
+  <meta property="dc:publisher" content="Fabien Conéjéro / FC84"/><meta property="dc:creator" content="https://github.com/madjeek-web"/><meta property="dc:date" datatype="xsd:date" content="2026-04-01"/>
   
   <!-- Projets FOAF avec relations explicites -->
   <link property="foaf:currentProject" rel="dc:relation" href="https://github.com/madjeek-web" typeof="foaf:Project"/>
@@ -1142,7 +1203,7 @@ Conférenciers aux Google Webmaster Conferences (ex : John Mueller). -->
         <div class="content-div">
             <hgroup>
                 <h1>Fabien Conéjéro / FC84</h1>
-                <h2>Project And Team Management - Artistic Director / Creative - Senior Front-End Developer - Full Expert SEO / SMO - Web designer / Graphic - Community Manager / Social Media - API</h2>
+                <h2>CEO &amp; Founder - Convergence H&amp;T | Full-Stack Developer | AI Expert | SEO / SMO / GEO | Project Manager | Artistic Director | FC84</h2>
             </hgroup>
 		        <div class="arrow-particles-container" id="particles-container">
                     <div class="arrow-particles">↓</div>
@@ -1155,75 +1216,124 @@ Conférenciers aux Google Webmaster Conferences (ex : John Mueller). -->
 
     <!-- Section Globalize.css -->
 	<!-- FC84 Microdonnées imbriquées -->
-   <article property="schema:hasPart" typeof="Article">
-    <div class="section">
-        <div class="content-div">
-            <hr class="hr">
-            <h3>CEO / FOUNDER | Madjeek Agency | Since 2009</h3>
-            <p>- Project managers and customers - Prospecting and client acquisition - Web Developer / Designer UI/UX - Full Expert SEO + SMO - Graphic Designer / Adobe 
-               - CUSTOMER SUPPORT - BRAND GRAPHIC IDENTITY - UX/UI - VISUAL EFFECTS FX - TEST - STUDY - QCD - AUDIT - GRAPHIC CHART - PROTOTYPE — INTERFACES - 
-               TECHNICAL DOC, / CDC - IMMERSIVE 3D USER EXPERIENCE / INTERACTIVE ENVIRONMENT / Website / Multimedia / Thematic / Concept - 
-			   Methods: Sequential / Cascading | Scrum | Agile | Kanban | Design Thinking |
-               DESC - QCD - CDC Business Proposal - Legal Conditions - CGV - Gantt - Customer Relationships - RGPD</p>
-            <hr class="hr">
-        </div>
-    </div>
-   </article>
-		
-    <!-- Section Probalize.css -->
-    <div class="section">
-        <div class="content-div">
-            <h3>SOFT SKILLS / QUALITIES / MINDSET</h3>
-            <p>Leadership - Positive Feedback - Emotional / Collective Intelligence - DESC Méthod - CHO spirit - Emphaty - Pedagogy - Relationship - Creative Concepts -
-               Delegation - Decision making - Open mind Communicative - Listen - Analyze - Adapting - Ethic - Organized</p>
-            <hr class="hr">
-        </div>
-    </div>
 
-    <!-- Sections supplémentaires -->
-    <div class="section">
-        <div class="content-div">
-            <h3>PROGRAMMING LANGUAGES / IDE</h3>
-            <p>HTML / CSS / PHP / JavaScript / SQL / JSON / XML / Media Queries WRD - Visual Studio Code / Cursor - FTP / FileZilla / CMS / Git / Github</p>
-        </div>
+<!-- ═══ Convergence Human And Technology - Mission ═══ -->
+<article property="schema:hasPart" typeof="Article" aria-label="Convergence Human And Technology - Mission et Direction">
+<div class="section">
+    <div class="content-div">
+        <hr class="hr">
+        <h3>CEO / Founder / Project Manager | Convergence Human And Technology | ESN - March 2026 - Today | France</h3>
+        <p>
+            Creation and direction of Convergence, an IT services company (ESN) focused on research and development of applied executive AI systems.<br><br>
+            Two core areas of work :<br>
+            - AI for everyday life : improving quality of life and addressing practical needs of individuals.<br>
+            - AI for the industrial world : meeting the operational requirements of industrial environments.<br><br>
+            Product roadmap management - creative direction - software development - communication.<br><br>
+            Private and paid desktop software B2B &amp; B2C - unique concepts, never explored before.<br>
+            Business process automation - AI integration - digital transformation consulting - system architecture.<br>
+            Concrete solutions adapted to organizations.<br><br>
+            Active search : visionary investors, co-founders, collaborators, international &amp; industrial partners.<br>
+            Open discussions to build innovative solutions together.<br><br>
+            convergence-tech@proton.me - convergence-human-technology.github.io/site
+        </p>
+        <hr class="hr">
     </div>
+</div>
+</article>
 
-    <div class="section">
-        <div class="content-div">
-            <h3>CONTACT</h3>
-            <p>
-			<a href="mailto:encrypt-free.74.mq2fl@aleeeas.com">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-      <polyline points="22,6 12,13 2,6"></polyline>
-    </svg>
-            encrypt-free.74.mq2fl@aleeeas.com
-            </a>
-			</p>
-        </div>
+<!-- ═══ Convergence - Services &amp; Technical Stack ═══ -->
+<article property="schema:hasPart" typeof="Article" aria-label="Convergence - Services et Stack Technique">
+<div class="section">
+    <div class="content-div">
+        <hr class="hr">
+        <h3>Convergence - Services &amp; Technical Stack</h3>
+        <p>
+            Services :<br>
+            - Business process automation (n8n, Make, Zapier, Power Automate, Python, Node.js)<br>
+            - AI integration : AI assistants, document analysis, specialized AI agents (Claude, OpenAI, open-source LLMs)<br>
+            - Digital transformation consulting : audit, digital maturity, actionable roadmap at 3-6-12 months<br>
+            - System architecture : distributed systems design, ERP audits, legacy modernization<br>
+            - Custom AI solutions : rapid prototyping, internal business tools, autonomous agents for complex processes<br>
+            - Team AI adoption support : training, operational playbooks, co-construction workshops<br><br>
+            Stack :<br>
+            n8n - Make - Zapier - Power Automate - Claude (Anthropic) - OpenAI GPT - Mistral - Llama - RAG / Embeddings - Lovable - Retool - Budibase - Streamlit - Python - Node.js - Supabase - Airtable - PostgreSQL - MySQL - REST API - GraphQL - Webhooks - Salesforce - HubSpot - SAP - Odoo - Dolibarr - Docker - Kubernetes<br><br>
+            github.com/Convergence-Human-And-Technology/applied-ai-research
+        </p>
+        <hr class="hr">
     </div>
+</div>
+</article>
 
-	<div class="section">
-        <div class="content-div">
-            <h3>...</h3>
-            <p>...</p>
-        </div>
-    </div>  
+<!-- ═══ Agence Web 2008 - 2025 ═══ -->
+<article property="schema:hasPart" typeof="Article" aria-label="Agence Web - 2008 à 2025">
+<div class="section">
+    <div class="content-div">
+        <hr class="hr">
+        <h3>CEO / Founder | Agence Web | 2008 - 2025 | France</h3>
+        <p>16 years directing a full-service digital agency - from strategy to production.<br><br>
+           Project management &amp; client relations - Prospecting &amp; client acquisition - Web Developer / Designer UI/UX - Full Expert SEO + SMO + GEO - Graphic Designer / Adobe Suite -
+           Customer Support - Brand &amp; Graphic Identity - UX/UI - Visual Effects FX - Test - Study - QCD - Audit - Graphic Chart - Prototype - Interfaces -
+           Technical Documentation / CDC - Immersive 3D User Experience / Interactive Environment / Website / Multimedia / Thematic / Concept.<br><br>
+           Methods : Sequential / Cascading | Scrum | Agile | Kanban | Design Thinking |
+           DESC - QCD - CDC - Business Proposal - Legal Conditions - CGV - Gantt - Customer Relationships - RGPD</p>
+        <hr class="hr">
+    </div>
+</div>
+</article>
+
+<!-- ═══ Technical Skills &amp; Stack ═══ -->
+<div class="section" aria-label="Compétences techniques et stack">
+    <div class="content-div">
+        <hr class="hr">
+        <h3>Technical Skills &amp; Stack - Full-Stack / AI / Automation / Design</h3>
+        <p>
+            Languages : HTML5 - CSS3 - JavaScript ES6+ - PHP 8.3 - Python - SQL - JSON - XML - Node.js<br>
+            Frameworks &amp; Libs : Symfony 7 - Next.js 16 - React 19 - TailwindCSS 4 - microMVC+<br>
+            AI &amp; Automation : Claude (Anthropic) - OpenAI GPT - Mistral - Llama - RAG / Embeddings - LangGraph - n8n - Make - Zapier - Power Automate - Agentic AI workflows<br>
+            Prototyping &amp; UI : Lovable - Retool - Budibase - Streamlit - Figma - Adobe Creative Suite (Ps / Ai / Id / Ae) - After Effects - Leonardo AI<br>
+            Databases : PostgreSQL - MySQL - Supabase - Airtable - Google Sheets / Excel<br>
+            DevOps &amp; Tools : Git - GitHub - VS Code - Cursor - Docker - Kubernetes - FTP / FileZilla - phpstan - PHPUnit<br>
+            CMS &amp; Platforms : WordPress - Joomla - PrestaShop - Drupal - WooCommerce<br>
+            APIs &amp; Integrations : REST API - GraphQL - Webhooks - JWT - Mailjet - Symfony Messenger - HttpClient<br>
+            CRM / ERP : Salesforce - HubSpot - SAP - Odoo - Dolibarr<br>
+            SEO / SMO / GEO / AEO : Technical SEO - Core Web Vitals - Semantic SEO - Schema.org - JSON-LD - FOAF - RDFa - SMO Strategy - GEO (AI engine optimization) - AEO (Answer Engine Optimization)<br>
+            AI Creative Tools : Suno AI - Nano Banana - Prompt Engineering (advanced)
+        </p>
+        <hr class="hr">
+    </div>
+</div>
+
+<!-- ═══ Soft Skills ═══ -->
+<div class="section" aria-label="Soft skills et qualités">
+    <div class="content-div">
+        <h3>Soft Skills / Qualities / Mindset</h3>
+        <p>Leadership - Positive Feedback - Emotional / Collective Intelligence - DESC Method - CHO Spirit - Empathy - Pedagogy - Relationship building - Creative Concepts -
+           Delegation - Decision making - Open mind - Communication - Listening - Analysis &amp; Synthesis - Adaptability - Ethics - Organization - Strategic thinking - Innovation</p>
+        <hr class="hr">
+    </div>
+</div>
+
+<!-- ═══ Contact ═══ -->
+<div class="section" aria-label="Contact">
+    <div class="content-div">
+        <h3>Contact</h3>
+        <p>
+            Fabien Conéjéro - FC84<br>
+            CEO &amp; Founder - Convergence Human And Technology<br>
+            convergence-tech@proton.me<br>
+            convergence-human-technology.github.io/site<br>
+            github.com/madjeek-web - github.com/Convergence-Human-And-Technology
+        </p>
+    </div>
+</div>
 
 
 <!-- Pied de page sémantique -->
   <footer property="schema:creator" typeof="Person">
   <meta property="schema:name" content="Fabien Conéjéro"/>
   <meta property="schema:alternateName" content="FC84"/>
-  <a href="mailto:contact@exemple.com">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-      <polyline points="22,6 12,13 2,6"></polyline>
-    </svg>
-    web-agengy@madjeek.fr.com
-  </a>
 </footer>
-	  
+
 
 <script>
 /* 
@@ -1315,18 +1425,3 @@ window.onload = function() {
     </script>
 	
 </main>   </body></html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
