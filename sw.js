@@ -5,18 +5,10 @@
 
 const CACHE_NAME = 'fc84-v3';
 const ASSETS_TO_CACHE = [
-  '/',
   '/index.html',
   '/manifest.json',
   '/icon-192.png',
-  '/icon-512.png',
-  '/openapi.yaml',
-  '/robots.txt',
-  '/sitemap.xml',
-  '/atom.xml',
-  '/opensearch.xml',
-  '/profile.json',
-  '/.well-known/ai-plugin.json'
+  '/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
