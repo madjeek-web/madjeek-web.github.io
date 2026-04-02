@@ -64,6 +64,83 @@ background: linear-gradient(to bottom, #0d2135 0%,#10376b 17%,#005884 48%,#4a9dc
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0d2135', endColorstr='#ffffff',GradientType=0 );
             
 background-size: 100%; background-attachment: fixed; font-family: Arial, sans-serif;}
+
+
+/* Centrage principal */
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Conteneur principal pour le contenu */
+h1, h2, p, a {
+    max-width: 800px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Style spécifique pour le titre principal */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Style pour les sous-titres */
+h2 {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+/* Style pour les paragraphes */
+p {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Style pour les liens */
+a {
+    text-align: center;
+    display: inline-block;
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Alternative avec flexbox sur un conteneur parent */
+/* Si vous voulez utiliser un conteneur wrapper spécifique */
+.legal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.legal-content h1,
+.legal-content h2,
+.legal-content p,
+.legal-content a {
+    text-align: center;
+    width: 100%;
+}
+
+
+
+  
         
 /* * Barre de défilement subtile * Barre de défilement très fine pour garder un design épuré */::-webkit-scrollbar{width:.5px;height:.5px;opacity:.01}::-webkit-scrollbar-button{width:.5px;height:.5px;opacity:.01}
 /* * Système de sections * Chaque section prend 100% de la hauteur d'écran */.section{height:100vh;width:100%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
@@ -121,24 +198,22 @@ document.addEventListener('keydown', function(e) {
 </head>
 <body>
 
-<h1>Mentions Légales</h1>
-  <p>Conformément aux dispositions de la loi n° 2004 - 575 du 21 juin 2004 pour la confiance en l'économie numérique (LCEN), il est porté à la connaissance des utilisateurs du site les présentes mentions légales.</p>
-
-  <hr>
-
-  <h2>Éditeur du site</h2>
-  <p><strong>Fabien Conéjéro</strong></p>
-  
-  <p><strong>Adresse e-mail :</strong> convergence-tech@proton.me</p>
-  <p><strong>Site web :</strong> <a href="https://convergence-human-technology.github.io/site/">https://convergence-human-technology.github.io/site/</a></p>
-
-  <hr>
-
-  <h2>Hébergement</h2>
-  <p><strong>Hébergeur :</strong> GitHub, Inc.</p>
-  <p><strong>Service :</strong> GitHub Pages</p>
-  <p><strong>Adresse :</strong> 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</p>
-  <p><strong>Site web :</strong> <a href="https://pages.github.com" target="_blank" rel="noopener">https://pages.github.com</a></p>
+<div class="legal-content">
+    <h1>Mentions Légales</h1>
+    <p>Conformément aux dispositions de la loi n° 2004 - 575 du 21 juin 2004 pour la confiance en l'économie numérique (LCEN), il est porté à la connaissance des utilisateurs du site les présentes mentions légales.</p>
+    
+    <h2>Éditeur du site</h2>
+    <p><strong>Fabien Conéjéro</strong></p>
+    
+    <p><strong>Adresse e-mail :</strong> convergence-tech@proton.me</p>
+    <p><strong>Site web :</strong> <a href="https://convergence-human-technology.github.io/site/">https://convergence-human-technology.github.io/site/</a></p>
+    
+    <h2>Hébergement</h2>
+    <p><strong>Hébergeur :</strong> GitHub, Inc.</p>
+    <p><strong>Service :</strong> GitHub Pages</p>
+    <p><strong>Adresse :</strong> 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</p>
+    <p><strong>Site web :</strong> <a href="https://pages.github.com" target="_blank" rel="noopener">https://pages.github.com</a></p>
+</div>
 
     
 </body>
