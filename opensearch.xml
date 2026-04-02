@@ -3,8 +3,7 @@
   <ShortName>FC84 Search</ShortName>
   <Description>Rechercher l'expertise de Fabien Conéjéro (FC84) / Convergence H&amp;T</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://github.io</Image>
-  <!-- URL de recherche : ici on redirige vers mon profil ou une recherche Google ciblée sur mon domaine -->
-  <Url type="text/html" method="get" template="https://google.com+{searchTerms}""")/>>
-  <moz:SearchForm>https://github.io</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://madjeek-web.github.io/favicon.ico</Image>
+  <Url type="text/html" method="get" template="https://www.google.com/search?q=site:madjeek-web.github.io+{searchTerms}"/>
+  <moz:SearchForm>https://madjeek-web.github.io/</moz:SearchForm>
 </OpenSearchDescription>
