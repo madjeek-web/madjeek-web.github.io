@@ -23,4 +23,4 @@ X-AI-Manifest: https://github.io
 X-OpenAPI-Spec: https://github.io
 
 # Indexation XML pour la structure et la fraîcheur
-Sitemap: https://github.io
+Sitemap: https://madjeek-web.github.io/sitemap.xml
