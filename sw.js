@@ -3,15 +3,24 @@
  * Ce script permet le fonctionnement hors-ligne et accelere le chargement .
  */
 
-const CACHE_NAME = 'fc84-v2';
+const CACHE_NAME = 'fc84-v3';
 const ASSETS_TO_CACHE = [
   '/',
-  '/index.html'
+  '/index.html',
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/openapi.yaml',
+  '/robots.txt',
+  '/sitemap.xml',
+  '/atom.xml',
+  '/opensearch.xml',
+  '/profile.json',
+  '/.well-known/ai-plugin.json'
 ];
 
 self.addEventListener('install', (event) => {
-  // Force le Service Worker a prendre le controle immediatement
-  self.skipWaiting(); 
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS_TO_CACHE);
@@ -20,7 +29,6 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  // Nettoyage des anciens caches pour eviter les erreurs "redundant"
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -36,8 +44,12 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    fetch(event.request).catch(() => {
-      return caches.match(event.request);
+    caches.match(event.request).then((response) => {
+      // Retourne le cache si trouvé, sinon va sur le réseau
+      return response || fetch(event.request).catch(() => {
+        // Fallback ultime : page d'erreur (optionnel)
+        return caches.match('/index.html');
+      });
     })
   );
 });
