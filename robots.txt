@@ -19,8 +19,8 @@ Allow: /
 
 # Liaison directe avec le manifest IA pour les agents autonomes
 # Note : Bien que non-standard pour les vieux robots, les IA de 2026 scannent ces commentaires.
-X-AI-Manifest: https://github.io
-X-OpenAPI-Spec: https://github.io
+X-AI-Manifest: https://madjeek-web.github.io/.well-known/ai-plugin.json
+X-OpenAPI-Spec: https://madjeek-web.github.io/openapi.yaml
 
 # Indexation XML pour la structure et la fraîcheur
 Sitemap: https://madjeek-web.github.io/sitemap.xml
