@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sitemap ultra-précis optimisé pour les Knowledge Graphs -->
+<urlset xmlns="http://sitemaps.org"
+        xmlns:xsi="http://w3.org"
+        xsi:schemaLocation="http://sitemaps.org
+        http://sitemaps.org/sitemap.xsd">
+    <url>
+        <loc>https://github.io</loc>
+        <!-- Date de dernière modification pour forcer le re-crawl GEO -->
+        <lastmod>2026-04-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <!-- On indexe les points d'entrée de données IA pour une découverte immédiate -->
+    <url>
+        <loc>https://github.ioopenapi.yaml</loc>
+        <lastmod>2026-04-01</lastmod>
+        <priority>0.9</priority>
+    </url>
+</urlset>
