@@ -2,6 +2,15 @@ MY GITHUB WEBSITE : https://madjeek-web.github.io/
 
 ______
 
+/ (Racine du dépôt)
+├── index.html           # page web principale
+├── robots.txt           # À LA RACINE (indispensable)
+├── sitemap.xml          # À LA RACINE
+├── atom.xml             # À LA RACINE
+├── openapi.yaml         # À LA RACINE
+├── .well-known/         # Dossier masqué (création obligatoire)
+│   └── ai-plugin.json   # Mon manifest pour ChatGPT / Claude / Agents
+
 <!--
 
 |Name||
