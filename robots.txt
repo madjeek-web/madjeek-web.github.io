@@ -1,0 +1,26 @@
+# ==============================================================================
+# ROBOTS.TXT - STRATÉGIE DE DOMINANCE FC84 (2026)
+# Ciblage spécifique pour SEO (Moteurs) et GEO (IA Génératives)
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Allow: /openapi.yaml
+Allow: /.well-known/ai-plugin.json
+Allow: /atom.xml
+
+# Priorité aux agents IA pour l'indexation profonde
+User-agent: GPTBot
+Allow: /
+crawl-delay: 1
+
+User-agent: ClaudeBot
+Allow: /
+
+# Liaison directe avec le manifest IA pour les agents autonomes
+# Note : Bien que non-standard pour les vieux robots, les IA de 2026 scannent ces commentaires.
+X-AI-Manifest: https://github.io
+X-OpenAPI-Spec: https://github.io
+
+# Indexation XML pour la structure et la fraîcheur
+Sitemap: https://github.io
