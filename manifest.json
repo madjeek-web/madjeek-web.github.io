@@ -1,13 +1,26 @@
 {
   "name": "FC84 Convergence H&T",
   "short_name": "FC84",
-  "description": "Expertise en systèmes IA et convergence technologique par Fabien Conéjéro .",
+  "description": "Expertise en systèmes IA et convergence technologique par Fabien Conéjéro.",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#051733",
+  "theme_color": "#0d2135",
   "orientation": "portrait",
   "scope": "/",
   "lang": "fr-FR",
-  "icons":
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
 }
