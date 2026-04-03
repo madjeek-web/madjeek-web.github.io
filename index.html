@@ -187,6 +187,9 @@ profile="http://www.w3.org/1999/xhtml/vocab http://www.w3.org/2002/08/xhtml/xhtm
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<!-- Blocage du "Clickjacking" (Sécurité++) Pour être sûr que personne n'encadre le site sans autorisation -->
+<meta http-equiv="X-Frame-Options" content="DENY" />
+
 <!-- Meta Compatibilité -->
 <meta http-equiv="imagetoolbar" content="no"><meta http-equiv="x-ua-compatible" content="ie=edge"><!-- OFF  <meta http-equiv="Content-Security-Policy" content="script-src 'self'"> -->
 
@@ -297,9 +300,6 @@ le contenu pour les utilisateurs finaux, améliorant ainsi l’expérience utili
 <!-- Rôle : Indique à tous les robots d'indexation de ne pas indexer, mais d'archiver la page. Objectif : Préserver le contenu sans le rendre visible 
  dans les résultats de recherche. -->
 <meta name="robots" content="archive" />
-<!-- Rôle : Indique à Google de conserver une archive de la page sans l'indexer. Objectif : Préserver le contenu pour référencement futur sans qu'il 
- soit affiché dans les résultats. -->
-<meta name="googlebot" content="archive" />
 <!-- Rôle : Indique à Yahoo (Slurp) d'archiver la page. Objectif : Conserver une version de la page dans l'historique d'indexation. -->
 <meta name="Slurp" content="archive" />
 <!-- Rôle : Indique à Bing d'archiver la page. Objectif : Offrir une version historique sans indexation active. -->
