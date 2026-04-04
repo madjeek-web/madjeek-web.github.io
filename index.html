@@ -1276,41 +1276,11 @@ Conseil pro : Assurez-vous d'utiliser le format JSON-LD dans votre <head> pour d
  * La valeur clip: rect(0 0 0 0) est préférée à display:none car elle reste accessible
  * aux lecteurs d'écran contrairement à display:none qui masque totalement.
  */
-.skip-link {
-    position: absolute;
-    top: -999px;
-    left: -999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-    border: 0;
-    z-index: 9999;
-}
+.skip-link {position: absolute;top: -999px; left: -999px; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; z-index: 9999;}
 .skip-link:focus-visible {
-    /* Visible uniquement au focus clavier, jamais à la souris */
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    width: auto;
-    height: auto;
-    overflow: visible;
-    clip: auto;
-    white-space: normal;
-    padding: 0.75rem 1.5rem;
-    background: #0d2135;
-    color: #ffffff;
-    font-family: 'Genos', sans-serif;
-    font-size: 18px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border: 2px solid #4a9dc5;
-    border-radius: 2px;
-    text-decoration: none;
-    outline: 3px solid #ffffff;
-    outline-offset: 2px;
-}
+/* Visible uniquement au focus clavier, jamais à la souris */
+position: fixed; top: 1rem; left: 1rem; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; padding: 0.75rem 1.5rem; background: #0d2135; color: #ffffff; 
+font-family: 'Genos', sans-serif; font-size: 18px; text-transform: uppercase; letter-spacing: 0.1em; border: 2px solid #4a9dc5; border-radius: 2px; text-decoration: none; outline: 3px solid #ffffff; outline-offset: 2px;}
 
 /*
  * ─── FOCUS VISIBLE : Navigation clavier haute visibilité ─────────────────────────
@@ -1322,11 +1292,7 @@ Conseil pro : Assurez-vous d'utiliser le format JSON-LD dans votre <head> pour d
  * NOTE : :focus-visible est supporté par tous les navigateurs modernes (Chrome 86+,
  * Firefox 85+, Safari 15.4+). Un polyfill n'est plus nécessaire en 2026.
  */
-:focus-visible {
-    outline: 3px solid #4a9dc5;
-    outline-offset: 4px;
-    border-radius: 2px;
-}
+:focus-visible {outline: 3px solid #4a9dc5; outline-offset: 4px; border-radius: 2px;}
 
 /*
  * ─── VISIBILITÉ ACCESSIBILITÉ : Fix lecteurs d'écran sur content-div ─────────────
