@@ -808,7 +808,7 @@ document.addEventListener('keydown', function(e) {
 
 
 
-<script defer>
+<script>
 	// ANIMATION MENU NAV
 $('.open-overlay').click(function() {
   var overlay_navigation = $('.overlay-navigation'),
@@ -1839,20 +1839,12 @@ font-family: 'Genos', sans-serif; font-size: 18px; text-transform: uppercase; le
      (effet géré par la règle .skip-link:focus-visible dans la couche CSS additionnelle ci-dessus). -->
 <a href="#main-content" class="skip-link">Aller au contenu principal</a>
 
-  <!-- Métadonnées critiques -->
-  <meta property="dc:publisher" content="Fabien Conéjéro / FC84"/><meta property="dc:creator" content="https://github.com/madjeek-web"/><meta property="dc:date" datatype="xsd:date" content="2026-04-01"/>
-  
-  <!-- Projets FOAF avec relations explicites -->
-  <link property="foaf:currentProject" rel="dc:relation" href="https://github.com/madjeek-web" typeof="foaf:Project"/>
-
-  <!-- Contenu principal avec double sémantique -->
-  <!-- id="main-content" : cible du skip link WCAG + ancre sémantique pour les IA -->
-  <!-- class="h-card" : activation du micro-format H-Card IndieWeb sur le bloc principal -->
-  <main id="main-content" role="main" property="schema:mainEntity" typeof="CreativeWork WebPageElement" resource="#mainContent" class="h-card">
 
 
-	  
-	  <!-- MENU NAV -->
+
+
+
+<!-- MENU NAV -->
 	  <div class="overlay-navigation">
   <nav role="navigation">
     <ul>
@@ -1870,6 +1862,29 @@ font-family: 'Genos', sans-serif; font-size: 18px; text-transform: uppercase; le
     <span class="bar-middle"></span>
     <span class="bar-bottom"></span>
   </div>
+
+
+
+
+
+
+
+
+
+
+	
+
+  <!-- Métadonnées critiques -->
+  <meta property="dc:publisher" content="Fabien Conéjéro / FC84"/><meta property="dc:creator" content="https://github.com/madjeek-web"/><meta property="dc:date" datatype="xsd:date" content="2026-04-01"/>
+  
+  <!-- Projets FOAF avec relations explicites -->
+  <link property="foaf:currentProject" rel="dc:relation" href="https://github.com/madjeek-web" typeof="foaf:Project"/>
+
+  <!-- Contenu principal avec double sémantique -->
+  <!-- id="main-content" : cible du skip link WCAG + ancre sémantique pour les IA -->
+  <!-- class="h-card" : activation du micro-format H-Card IndieWeb sur le bloc principal -->
+  <main id="main-content" role="main" property="schema:mainEntity" typeof="CreativeWork WebPageElement" resource="#mainContent" class="h-card">
+
     
 
     
