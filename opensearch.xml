@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com" xmlns:moz="http://mozilla.org">
   <ShortName>FC84 Search</ShortName>
-  <Description>Rechercher l'expertise de Fabien Conéjéro (FC84) / Convergence H&amp;T</Description>
+  <Description>Search the expertise of Fabien Conéjéro (FC84) - Artistic Director &amp; Project Management</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <Image width="192" height="192" type="image/png">https://madjeek-web.github.io/icon-192.png</Image>
   <Url type="text/html" method="get" template="https://www.google.com/search?q=site:madjeek-web.github.io+{searchTerms}"/>
