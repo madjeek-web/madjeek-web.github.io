@@ -1,14 +1,14 @@
 {
-  "name": "FC84 Convergence H&T",
+  "name": "FC84 - Fabien Conéjéro",
   "short_name": "FC84",
-  "description": "Expertise en systèmes IA et convergence technologique par Fabien Conéjéro.",
+  "description": "Artistic Director & Project Management. 360° Communication & Brand Image. Senior Web Developer, Expert SEO/SMO/GEO.",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#051733",
-  "theme_color": "#0d2135",
+  "background_color": "#FFFDF9",
+  "theme_color": "#0D0A08",
   "orientation": "portrait",
   "scope": "/",
-  "lang": "fr-FR",
+  "lang": "en",
   "icons": [
     {
       "src": "icon-192.png",
