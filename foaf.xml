@@ -1,19 +1,70 @@
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:admin="https://github.com/madjeek-web" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<foaf:PersonalProfileDocument rdf:about="https://madjeek-web.github.io/" dc:title="Fabien Conéjéro / FC84">
-<foaf:maker rdf:resource="#Fabien Conéjéro"/>
-</foaf:PersonalProfileDocument>
-<foaf:Person rdf:ID="Fabien Conéjéro">
-<foaf:name>Fabien Conéjéro</foaf:name>
-<foaf:title>Mr</foaf:title>
-<foaf:givenname>Fabien Conéjéro</foaf:givenname>
-<foaf:family_name>Conéjéro</foaf:family_name>
-<foaf:nick>FC84</foaf:nick>
-<foaf:gender>male</foaf:gender>
-<foaf:geekCode>GCS GAT</foaf:geekCode>
-<foaf:depiction rdf:resource="https://avatars.githubusercontent.com/u/83957788?v=4"/>
-<foaf:workplaceHomepage rdf:resource="https://madjeek-web.github.io/"/>
-<foaf:workInfoHomepage rdf:resource="https://madjeek-web.github.io/"/>
-<foaf:interest rdf:resource="https://www.torproject.org/"/>
-<foaf:mbox rdf:resource="mailto:encrypt-free.74.mq2fl@aleeas.com"/>
-</foaf:Person>
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" 
+  xmlns:foaf="http://xmlns.com/foaf/0.1/" 
+  xmlns:admin="https://github.com/madjeek-web" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:schema="https://schema.org/">
+
+  <!-- Document de profil personnel -->
+  <foaf:PersonalProfileDocument rdf:about="https://madjeek-web.github.io/foaf.xml" dc:title="Fabien Conéjéro / FC84 - Professional Profile">
+    <foaf:maker rdf:resource="#fabien-conejero"/>
+    <foaf:primaryTopic rdf:resource="#fabien-conejero"/>
+    <dc:date>2026-05-31</dc:date>
+  </foaf:PersonalProfileDocument>
+
+  <!-- Personne -->
+  <foaf:Person rdf:ID="fabien-conejero">
+    <foaf:name>Fabien Conéjéro</foaf:name>
+    <foaf:title>Mr</foaf:title>
+    <foaf:givenname>Fabien</foaf:givenname>
+    <foaf:family_name>Conéjéro</foaf:family_name>
+    <foaf:nick>FC84</foaf:nick>
+    <foaf:gender>male</foaf:gender>
+    
+    <!-- Image -->
+    <foaf:depiction rdf:resource="https://avatars.githubusercontent.com/u/83957788?v=4"/>
+    
+    <!-- Pages web -->
+    <foaf:homepage rdf:resource="https://madjeek-web.github.io/"/>
+    <foaf:workplaceHomepage rdf:resource="https://madjeek-web.github.io/"/>
+    <foaf:workInfoHomepage rdf:resource="https://madjeek-web.github.io/"/>
+    
+    <!-- Comptes sociaux vérifiables -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountName>madjeek-web</foaf:accountName>
+        <foaf:accountServiceHomepage rdf:resource="https://github.com/"/>
+        <foaf:accountProfilePage rdf:resource="https://github.com/madjeek-web"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountName>fabien-conejero</foaf:accountName>
+        <foaf:accountServiceHomepage rdf:resource="https://www.linkedin.com/"/>
+        <foaf:accountProfilePage rdf:resource="https://www.linkedin.com/in/fabien-conejero"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Centres d'intérêt -->
+    <foaf:interest rdf:resource="https://www.torproject.org/"/>
+    <foaf:interest rdf:resource="https://schema.org/"/>
+    <foaf:interest rdf:resource="https://www.w3.org/standards/"/>
+
+    <!-- Contact -->
+    <foaf:mbox rdf:resource="mailto:encrypt-free.74.mq2fl@aleeas.com"/>
+  </foaf:Person>
+
+  <!-- Extension Schema.org pour les compétences professionnelles -->
+  <schema:Person rdf:about="#fabien-conejero">
+    <schema:jobTitle>Artistic Director &amp; Project Management</schema:jobTitle>
+    <schema:description>Expert SEO, Project Manager, Artistic Director and Senior Full-Stack Developer. 16+ years of experience.</schema:description>
+    <schema:knowsAbout>Search Engine Optimization</schema:knowsAbout>
+    <schema:knowsAbout>Project Management</schema:knowsAbout>
+    <schema:knowsAbout>Artistic Direction</schema:knowsAbout>
+    <schema:knowsAbout>Full-Stack Development</schema:knowsAbout>
+    <schema:knowsAbout>UI/UX Design</schema:knowsAbout>
+  </schema:Person>
+
 </rdf:RDF>
